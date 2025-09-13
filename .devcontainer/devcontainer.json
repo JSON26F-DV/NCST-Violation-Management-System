@@ -1,0 +1,11 @@
+{
+  "name": "PHP App",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/var/www/html",
+  "customizations": {
+    "vscode": {
+      "extensions": ["felixfbecker.php-intellisense"]
+    }
+  }
+}
