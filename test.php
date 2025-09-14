@@ -15,21 +15,20 @@
         <td>Name</td>
         <td>Image</td>
       </tr>
-      <?php
-      $i = 1;
-      $rows = mysqli_query($conn, "SELECT * FROM tb_upload ORDER BY id DESC")
-      ?>
+<?php
+$result = mysqli_query($conn, "SELECT * FROM tb_upload ORDER BY id DESC");
+?>
+<?php while ($row = mysqli_fetch_assoc($result)) : ?>
+<tr>
+  <td><?php echo $i++; ?></td>
+  <td><?php echo $row["name"]; ?></td>
+  <td><img src="/ncst/public/uploads/profile/<?php echo $row['image']; ?>" alt="profile"></td>
+</tr>
+<?php endwhile; ?>
 
-      <?php foreach ($rows as $row) : ?>
-      <tr>
-        <td><?php echo $i++; ?></td>
-        <td><?php echo $row["name"]; ?></td>
-        <td> <img src="img/<?php echo $row["image"]; ?>" width = 200 title="<?php echo $row['image']; ?>"> </td>
-      </tr>
-      <?php endforeach; ?>
     </table>
     <br>
-    <a href="../uploadimagefile">Upload Image File</a>
+    <a href="test2.php">Upload Image File</a>
   </body>
 </html>
 <?php

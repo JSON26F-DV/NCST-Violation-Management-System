@@ -195,7 +195,7 @@
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                <img src="/public/images/ncstLogo.png"  alt="NCST Logo" height="35">
+                <img src="/ncst/public/assets/ncstLogo.png"  alt="NCST Logo" height="35">
             </a>
             <div class="flex_centered mt-2 position-relative">
               <h4>NCST</h4>
@@ -259,7 +259,7 @@
                                     Settings
                                 </a>
                                 <div class="dropdown-divider-custom"></div>
-                                <a href="/src/views/guest/login/logout.php" class="dropdown-item-custom">
+                                <a href="../../guest/login/logout.php" class="dropdown-item-custom">
                                     <i class="fas fa-sign-out-alt"></i>
                                     Log Out
                                 </a>

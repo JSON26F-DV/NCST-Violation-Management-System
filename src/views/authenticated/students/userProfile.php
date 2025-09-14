@@ -168,7 +168,7 @@
                     <div class='bg-light-blue p-4 text-center d-flex flex-column'>
                         <div class='user_content flex_centered mb-3 position-relative'>
                             <div class='user_picture overflow-hidden'>
-                            <img src='assets/userProfile/$profile' width='170' alt='$profile'>
+                            <img src='/ncst/public/uploads/profile/$profile' alt='profile' width='180px'>
                             </div>
                             <div class='camera'>
                                 <span class='iconify' data-icon='fluent-color:camera-20' data-width='30px'></span> 

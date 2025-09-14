@@ -59,9 +59,9 @@
             <div class="col-12 col-lg-8">
                 <div class="text-center mb-5">
                     <div class=" p-1 rounded-3 position-relative " style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);" >
-                        <img src='  /public/images/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
+                        <img src='/ncst/public/assets/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
                     <div class="d-flex align-items-center mb-4">
-                        <div class="flex_centered  w-100">
+                        <div class=" w-100">
                             <h3 class="fw-bold  text-light">National College of Science and Technology</h3>
                             <p class="mb-0 small text-light">Amafel Building, Aguinaldo Highway, Dasmariñas, Cavite 4114</p>
                         </div>

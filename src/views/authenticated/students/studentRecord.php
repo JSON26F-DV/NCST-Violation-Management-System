@@ -49,10 +49,9 @@
                         #Profile Header 
                         echo "
                             <!-- STUDENT PROFILE -->
-                            <div class='profile-header p-4 mb-4 shadow-sm' style='background: linear-gradient(to right, #0d6efd, #66b2ff);
-'>
+                            <div class='profile-header p-4 mb-4 shadow-sm' style='background: linear-gradient(to right, #0d6efd, #66b2ff);'>
                                 <div class='d-flex align-items-center'>
-                                    <img src='/public/images/default.png' alt='Student Avatar' class='rounded-circle me-3 bg-light' style='width: 80px; height: 80px; object-fit: cover; border: 3px solid rgba(255,255,255,0.2)'>
+                                    <img src='/ncst/public/uploads/profile/{$row->profile_pic}' alt='Student Avatar' class='rounded-circle me-3 bg-light' style='width: 80px; height: 80px; object-fit: cover; border: 3px solid rgba(255,255,255,0.2)'>
                                     <div>
                                         <h2 class='mb-1 text-white'>{$row->first_name} {$row->last_name}</h2>
                                         <p class='mb-0 opacity-75 text-white'>{$row->course} • {$row->year_level} Year</p>
@@ -67,7 +66,7 @@
                                         <span class='badge bg-primary bg-opacity-10 text-primary'>Official</span>
                                     </div>
                                     <div class='document-preview mb-4'>
-                                        <img src='/public/images/ncstLogo.png' alt='Transcript Preview' class='img-fluid rounded' style='max-height: 100%; max-width: 100%; object-fit: contain;'>
+                                        <img src='/ncst/public/assets/ncstLogo.png' alt='Transcript Preview' class='img-fluid rounded' style='max-height: 100%; max-width: 100%; object-fit: contain;'>
                                     </div>
                                     <div class='d-flex justify-content-end gap-2'>
                                         <a href='#' class='btn btn-outline-secondary btn-view'>View PDF</a>
@@ -121,7 +120,7 @@
                             <div class='card-body p-4' style='filter: blur(3px); opacity: 0.7;'>
                                         
                                 <div class='d-flex justify-content-between align-items-center mb-4'>
-                                    <img src='  /public/images/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
+                                    <img src='/ncst/public/assets/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
                                     <div class='text-end'>
                                         <span class='badge bg-primary bg-opacity-10 text-primary rounded-pill'>Official Document</span>
                                         <div class='text-muted small mt-1'>Ref: GM-2023-55851</div>
@@ -187,7 +186,7 @@
                             <div class='card-body p-4'>
 
                             <div class='d-flex justify-content-between align-items-center mb-4'>
-                                <img src='  /public/images/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
+                                <img src='/ncst/public/assets/ncstLogo.png' alt='NCST Logo' width='100' class='school-logo'>
                                 <div class='text-end'>
                                     <span class='badge bg-primary bg-opacity-10 text-primary rounded-pill'>Official Document</span>
                                     <div class='text-muted small mt-1'>Ref: GM-{$row->student_id}</div>

@@ -16,34 +16,35 @@ if(isset($_POST["submit"])){
     $imageExtension = explode('.', $fileName);
     $imageExtension = strtolower(end($imageExtension));
     if ( !in_array($imageExtension, $validImageExtension) ){
-      echo
-      "
-      <script>
-        alert('Invalid Image Extension');
-      </script>
+      echo"
+        <script>
+            alert('Invalid Image Extension');
+        </script>
       ";
     }
     else if($fileSize > 1000000){
-      echo
-      "
-      <script>
-        alert('Image Size Is Too Large');
-      </script>
+      echo"
+        <script>
+          alert('Image Size Is Too Large');
+        </script>
       ";
     }
     else{
       $newImageName = uniqid();
       $newImageName .= '.' . $imageExtension;
 
-      move_uploaded_file($tmpName, 'img/' . $newImageName);
-      $query = "INSERT INTO tb_upload VALUES('', '$name', '$newImageName')";
+      $uploadDir = __DIR__ . '/public/uploads/profile/';
+      move_uploaded_file($tmpName, $uploadDir . $newImageName);
+
+      $query = "INSERT INTO tb_upload (name, image) VALUES('$name', '$newImageName')";
+
       mysqli_query($conn, $query);
       echo
       "
-      <script>
-        alert('Successfully Added');
-        document.location.href = 'data.php';
-      </script>
+        <script>
+          alert('Successfully Added');
+          document.location.href = 'test.php';
+        </script>
       ";
     }
   }
@@ -67,3 +68,7 @@ if(isset($_POST["submit"])){
     <a href="data.php">Data</a>
   </body>
 </html>
+
+<?php
+  include("footer.php");
+?>
