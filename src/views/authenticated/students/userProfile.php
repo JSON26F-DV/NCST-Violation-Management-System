@@ -137,6 +137,7 @@
             $social_media      = $row['social_media'];
             $address           = $row['address'];
             $contact_number    = $row['contact_number'];
+            $profile = $row['profile_pic'];
 
             // ACADEMIC INFORMATION
             $student_credits   = $row['student_credits'];
@@ -167,8 +168,7 @@
                     <div class='bg-light-blue p-4 text-center d-flex flex-column'>
                         <div class='user_content flex_centered mb-3 position-relative'>
                             <div class='user_picture overflow-hidden'>
-                                <img src='/public/images/default.png' width='170px' alt='profile'>
-
+                            <img src='assets/userProfile/$profile' width='170' alt='$profile'>
                             </div>
                             <div class='camera'>
                                 <span class='iconify' data-icon='fluent-color:camera-20' data-width='30px'></span> 
@@ -183,7 +183,7 @@
                             <span class='text-muted overflow-hidden'>$email</span>
                         </div>
                         <div class='d-flex justify-content-between align-items-center mb-3 gap-3'>
-                            <span class='iconify' data-icon='fluent-color:contact-card-32' data-width='30px'></span>  
+                            <span class='iconify' data-icon='fluent-color:link-multiple-24' data-width='30px'></span>  
                             <span class='text-muted overflow-hidden'>$social_media</span>
                         </div>
                         <div class='d-flex justify-content-between align-items-center mb-3 gap-3'>

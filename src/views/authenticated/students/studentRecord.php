@@ -107,7 +107,7 @@
 </div>
 
 <div class='container py-5'>
-    <!-- Good Moral Certificate -->
+    <!-- GOOD MORAL CERTIFICATION -->
 
     <?php
             $user_id = $_SESSION["student_id"];
@@ -115,7 +115,7 @@
             while ($row = $result->fetch_object()){
                 $student_id = $row->student_id;
                 $row->student_id = substr($student_id, 0, 4) . "-" . substr($student_id, 4);
-                if ($row->student_credits <= 80 ) {
+                if ($row->student_credits < 80 ) {
                     echo "
                         <div class='card certificate-card shadow-sm border-0 mb-4 position-relative'>
                             <div class='card-body p-4' style='filter: blur(3px); opacity: 0.7;'>

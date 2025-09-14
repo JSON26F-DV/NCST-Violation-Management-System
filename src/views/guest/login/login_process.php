@@ -2,7 +2,7 @@
 include("../../../config/config.php");
 if (isset($_POST["logIn"])) {
     $email = $_POST['email'];
-    $password = $_POST['password']; // plain input
+    $password = $_POST['password']; 
 
     $sql = "SELECT * FROM students WHERE email=?";
     $stmt = $conn->prepare($sql);
@@ -20,14 +20,16 @@ if (isset($_POST["logIn"])) {
             exit();
         } else {
         echo "
-            <script>alert('Wrong Email or Password');
+            <script>
+                alert('Wrong Email or Password');
                 window.location.href = 'loginPage.php';
             </script>
             ";
         }
     } else {
         echo "
-            <script>alert('Wrong Email or Password');
+            <script>
+                alert('Wrong Email or Password');
                 window.location.href = 'loginPage.php';
             </script>
         ";
