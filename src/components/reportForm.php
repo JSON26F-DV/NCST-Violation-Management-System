@@ -45,7 +45,7 @@
       <div class="modal-header bg-primary">
         <div class="d-flex align-items-center">
             <div class="logo-container me-3">
-                <img src="/public/images/ncstLogo.png" alt="NCST Logo" width="64" height="64" class="d-block">
+                <img src="/ncst/public/assets/ncstLogo.png" alt="NCST Logo" width="64" height="64" class="d-block">
             </div>
             <div>
                 <h4 class=" mb-1"><strong class='text-white'>NATIONAL COLLEGE OF SCIENCE AND TECHNOLOGY</strong></h4>
