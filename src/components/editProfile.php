@@ -61,50 +61,102 @@ if (isset($_POST["updateUser"])) {
     }
     exit();
 }
-
 echo "
     <div class='modal fade' id='profileModal' tabindex='-1' aria-labelledby='profileModalLabel' aria-hidden='true'>
-        <div class='modal-dialog modal-dialog-centered modal-md'>
-            <div class='modal-content container-md p-4'>
-                <div class='modal-header border-0 pb-0 flex_centered'>
-                    <h5 class='modal-title fs-4' id='profileModalLabel'>Update Profile Details</h5>
+        <div class='modal-dialog modal-lg modal-dialog-centered'>
+            <div class='modal-content'>
+                <div class='modal-header text-center bg-primary flex_centered'>
+                    <h5 class='modal-title fw-bold mx-auto text-light' id='profileModalLabel'>Update Profile Information</h5>
                 </div>
-                <div class='modal-body pt-0'>
-                    <form action='userProfile.php'  method='POST' autocomplete='off' enctype='multipart/form-data'>
-                        <div class='mb-4 text-center'>
-                            <div class='text-center text-muted m-3 p-3 input_profile'>
-                                <span class='iconify' data-icon='fluent-color:add-circle-32' data-width='60px'></span>  
-                                <div>Change Profile Picture</div>
+                <div class='modal-body px-4'>
+                    <form action='userProfile.php' method='POST' autocomplete='off' enctype='multipart/form-data'>
+                        <div class='row g-4'>
+                            <!-- Left Column - Profile Picture -->
+                            <div class='col-md-5 d-flex flex-column align-items-center'>
+                                <div class='mb-4'>
+                                    <div class='user_content flex_centered mb-1 position-relative'>
+                                        <div class='user_picture overflow-hidden rounded-circle border border-4'>
+                                            <img src='/ncst/public/uploads/profile/$profile' alt='profile' width='180' height='180' class='object-fit-cover'>
+                                            </div>
+                                            <div class='camera position-absolute z-100 bottom-0 end-12  rounded-circle p-2 shadow-sm border border-3 border-light' 
+                                                style='cursor: pointer; transform: translate(-10px, -10px);' 
+                                                onclick=\"document.getElementById('image').click()\">
+                                                <span class='iconify' data-icon='fluent-color:camera-20' data-width='24px'></span>
+                                            </div>
+                                    </div>
+                                    <div class='input-group'>
+                                        <input type='file' class='form-control' id='image' name='image' accept='.jpg, .jpeg, .png'>
+                                    </div>
+                                </div>
+                                
+                                <!-- User Info Display -->
+                                <div class='w-100'>
+                                    <div class='d-flex align-items-center mb-2 p-3 bg-light rounded'>
+                                        <span class='iconify me-3' data-icon='fluent-color:person-starburst-24' data-width='30px'></span>
+                                        <div class='flex-grow-1'>
+                                            <small class='text-muted d-block'>Full Name</small>
+                                            <span class='fw-semibold'>$first_name $middle_name $last_name</span>
+                                        </div>
+                                    </div>
+                                    <div class='d-flex align-items-center mb-3 p-3 bg-light rounded'>
+                                        <span class='iconify me-3' data-icon='fluent-color:number-symbol-square-24' data-width='30px'></span>
+                                        <div class='flex-grow-1'>
+                                            <small class='text-muted d-block'>Student ID</small>
+                                            <span class='fw-semibold'>$student_id</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class='input-group'>
-                                <input type='file' class='form-control' id='image' name='image' accept='.jpg, .jpeg, .png'>
+                            
+                            <!-- Right Column - Form Fields -->
+                            <div class='col-md-7'>
+                                <div class='mb-3 d-flex justify-content-center flex-column'>
+                                    <label for='updated_email' class='form-label fw-semibold'>
+                                        <span class='iconify me-2' data-icon='fluent-color:mail-24' data-width='30px'></span>Email Address
+                                    </label>
+                                    <input type='email' class='form-control' name='updated_email' id='updated_email' value='{$row['email']}' required>
+                                </div>
+                                
+                                <div class='mb-3 d-flex justify-content-center flex-column'>
+                                    <label for='updated_social' class='form-label fw-semibold d-flex'>
+                                        <span class='iconify me-2' data-icon='fluent-color:people-interwoven-24' data-width='30px'></span>Social Media
+                                    </label>
+                                    <div class='input-group'>
+                                        <span class='input-group-text'>
+                                            @
+                                        </span>
+                                        <input type='text' class='form-control' name='updated_social' id='updated_social' value='{$row['social_media']}' placeholder='e.g., @username'>
+                                    </div>
+                                </div>
+                                
+                                <div class='mb-3 d-flex justify-content-center flex-column'>
+                                    <label for='updated_address' class='form-label fw-semibold'>
+                                        <span class='iconify me-2' data-icon='fluent-color:location-ripple-24' data-width='30px'></span>Address
+                                    </label>
+                                    <textarea class='form-control' name='updated_address' id='updated_address' rows='3' placeholder='Enter your complete address'>{$row['address']}</textarea>
+                                </div>
+                                
+                                <div class='mb-3 d-flex justify-content-center flex-column'>
+                                    <label for='updated_contact' class='form-label fw-semibold'>
+                                        <span class='iconify me-2' data-icon='fluent-color:phone-24' data-width='30px'></span>Contact Number
+                                    </label>
+                                    <div class='input-group'>
+                                        <span class='input-group-text'>
+                                            #
+                                        </span>
+                                        <input type='tel' class='form-control' name='updated_contact' id='updated_contact' value='{$row['contact_number']}' placeholder='+63 9XX XXX XXXX'>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class='mb-3'>
-                            <label for='email' class='form-label'>Email address</label>
-                            <input type='email' class='form-control' name='updated_email' id='updated_email' value='{$row['email']}'>
-                        </div>
-                        <div class='mb-3'>
-                            <label for='social' class='form-label'>Social Media Link</label>
-                            <div class='input-group'>
-                                <span class='input-group-text'><i class='bi bi-link-45deg'>@</i></span>
-                                <input type='text' class='form-control' name='updated_social' id='updated_social' value='{$row['social_media']}'>
-                            </div>
-                        </div>
-                        <div class='mb-3'>
-                            <label for='address' class='form-label'>Address</label>
-                            <textarea class='form-control' name='updated_address' id='updated_address' rows='2'>{$row['address']}</textarea>
-                        </div>
-                        <div class='mb-4'>
-                            <label for='contact' class='form-label'>Contact Number</label>
-                            <div class='input-group'>
-                                <span class='input-group-text'><i class='bi bi-telephone'>#</i></span>
-                                <input type='tel' class='form-control' name='updated_contact' id='updated_contact' value='{$row['contact_number']}'>
-                            </div>
-                        </div>
-                        <div class='d-flex justify-content-between modal-footer border-0 px-0 pt-4'>
-                            <button type='button' class='btn btn-outline-secondary' data-bs-dismiss='modal'>Cancel</button>
-                            <button type='submit' class='btn btn-primary px-4' name='updateUser'>Save Changes</button>
+                        
+                        <div class='modal-footer border-top mt-4 pt-3'>
+                            <button type='button' class='btn btn-outline-secondary' data-bs-dismiss='modal'>
+                                <i class='bi bi-x-circle me-2'></i>Cancel
+                            </button>
+                            <button type='submit' class='btn btn-primary' name='updateUser'>
+                                <i class='bi bi-check-circle me-2'></i>Save Changes
+                            </button>
                         </div>
                     </form>
                 </div>
