@@ -187,6 +187,14 @@
           font-weight: bolder;
           border-bottom-left-radius: 0;
         }
+        .notification {
+            width: 400px;
+            height: 400px;
+        }
+        .drop-notification {
+            width: 400px;
+            height: 500px;
+        }
     </style>
 </head>
 <body>
@@ -222,16 +230,23 @@
                     <!-- Reports/Help -->
                     <li class="nav-item">
                         <button  type="button"   class="nav-link" data-bs-toggle="modal" data-bs-target="#reportForm">
-                            <span class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='35px'></span>
+                            <span class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></span>
                         </button>
                     </li>
 
                     <!-- Notifications -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Notifications">
-                            <span class='iconify' data-icon='fluent-color:alert-28' data-width='35px'></span>
-                            <span class="notification-badge">3</span>
-                        </a>
+                            <details class="profile-dropdown">
+                                        <summary title='Account'>
+                                            <span class='iconify' data-icon='fluent-color:alert-28' data-width='25px'></span>
+                                            <span class='notification-badge'>3</span>
+                                        </summary>
+                                            <div class='dropdown-menu-custom drop-notification'>
+                                                <?php
+                                                    include("../authenticated/students/student_mail.php");
+                                                ?>
+                                            </div>
+                        </details>
                     </li>
 
                     <!-- Profile Dropdown -->
@@ -272,5 +287,5 @@
     </nav>
 
     <?php
-      include("reportForm.php");
+        include("reportForm.php");
     ?>

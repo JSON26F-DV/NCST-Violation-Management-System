@@ -1,4 +1,3 @@
-
 <style>
     body {
         background-color: #f0f2f5;
@@ -53,64 +52,63 @@
             </div>
         </div>
     </div>
-        <?php
-                $user_id = $_SESSION["student_id"];
-                $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
-                $row = $result->fetch_assoc();
+<?php
+    $user_id = $_SESSION["student_id"];
+    $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
+    $row = $result->fetch_assoc();
 
-                $student_id        = $row['student_id'];
-                $email             = $row['email'];
-if (isset($_POST["sendingMail"])) {
-    try {
-        $ncst = $_POST['ncst_department'];
-        $subject = $_POST['subject'];
-        $message = $_POST['body'];
-        $profile_pic = null;
+    $student_id        = $row['student_id'];
+    $email             = $row['email'];
+    if (isset($_POST["sendingMail"])) {
+        try {
+            $ncst = 202355851;
+            $subject = $_POST['subject'];
+            $message = $_POST['body'];
+            $profile_pic = null;
 
-        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-            $fileName = $_FILES["image"]["name"];
-            $fileSize = $_FILES["image"]["size"];
-            $tmpName = $_FILES["image"]["tmp_name"];
+            if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+                $fileName = $_FILES["image"]["name"];
+                $fileSize = $_FILES["image"]["size"];
+                $tmpName = $_FILES["image"]["tmp_name"];
 
-            $validImageExtension = ['jpg', 'jpeg', 'png'];
-            $imageExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                $validImageExtension = ['jpg', 'jpeg', 'png'];
+                $imageExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-            if (!in_array($imageExtension, $validImageExtension)) {
-                echo "<script>alert('Invalid Image Extension');</script>";
-            } elseif ($fileSize > 5000000) {
-                echo "<script>alert('Image Size Is Too Large');</script>";
-            } else {
-                $newImageName = uniqid() . '.' . $imageExtension;
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/ncst/public/uploads/reports/';
-                if (move_uploaded_file($tmpName, $uploadDir . $newImageName)) {
-                    $profile_pic = $newImageName; 
+                if (!in_array($imageExtension, $validImageExtension)) {
+                    echo "<script>alert('Invalid Image Extension');</script>";
+                } elseif ($fileSize > 5000000) {
+                    echo "<script>alert('Image Size Is Too Large');</script>";
                 } else {
-                    echo "<script>alert('Failed to upload image');</script>";
+                    $newImageName = uniqid() . '.' . $imageExtension;
+                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/ncst/public/uploads/reports/';
+                    if (move_uploaded_file($tmpName, $uploadDir . $newImageName)) {
+                        $profile_pic = $newImageName; 
+                    } else {
+                        echo "<script>alert('Failed to upload image');</script>";
+                    }
                 }
             }
-        }
 
         // Prepared statement para safe
         $stmt = $conn->prepare("INSERT INTO Mail_log (from_id, to_id, email, subject, body, attachment) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("iissss", $student_id, $ncst, $email, $subject, $message, $profile_pic);
 
-        if ($stmt->execute()) {
-            echo "
-                <script>
-                    alert('Report sent successfully!');
-                    window.location.href = 'userProfile.php';
-                </script>";
-        } else {
-            echo "<script>alert('Sending failed: " . $stmt->error . "');</script>";
+            if ($stmt->execute()) {
+                echo "
+                    <script>
+                        alert('Report sent successfully!');
+                        window.location.href = 'userProfile.php';
+                    </script>";
+            } else {
+                echo "<script>alert('Sending failed: " . $stmt->error . "');</script>";
+            }
+        } catch (Exception $e) {
+            echo '<div class="alert alert-danger">' . $e->getMessage() . '</div>';
         }
-
-    } catch (Exception $e) {
-        echo '<div class="alert alert-danger">' . $e->getMessage() . '</div>';
+        exit();
     }
-    exit();
-}
 
-            echo"
+        echo"
                 <form method='POST' autocomplete='off' enctype='multipart/form-data'>
                     <div class='modal-body'>
                     <div class='card p-4 mb-4'>
@@ -122,7 +120,7 @@ if (isset($_POST["sendingMail"])) {
 
                             <div class='mb-3'>
                                 <label for='toEmail' class='form-label fw-bold'>To</label>
-                                <input type='email' class='form-control' id='toEmail' name='ncst_department' value='ncst_department@office.edu.ph' readonly>
+                                <input type='email' class='form-control' id='toEmail' name='ncst_department' value='StudentAffairs@ncst.edu.ph' readonly>
                             </div>
 
                             <div class='mb-3'>

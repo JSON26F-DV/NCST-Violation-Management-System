@@ -1,11 +1,8 @@
 <?php
-    include("../../../header.php");
+    include("../../../../header.php");
 
-    $sql = "SELECT * FROM users WHERE id = ".$_GET['id'];
-    $query = $conn->query($sql);
-    $result = $query->fetch_object();
 ?>
-?>
+
     <style>
         body {
             background-color: #f8f9fa;
