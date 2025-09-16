@@ -51,7 +51,7 @@
                 <?php
                     $sql = "SELECT m.*, s.profile_pic 
                             FROM Mail_log m
-                            JOIN students s ON m.from_id = s.student_id";
+                            JOIN students s ON m.from_id = s.student_id ORDER BY created_at DESC";
                     $query = $conn->query($sql);
                     if(!$query){
                         die("Query failed: ".$conn->error);

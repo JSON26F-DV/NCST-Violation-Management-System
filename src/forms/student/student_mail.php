@@ -109,15 +109,16 @@
     echo "
             <div class='mail-content'>
                 <h5 class='section-title'>Mail Details</h5>
-                
-                <div class='mb-4'>
-                    <label class='form-label'>From</label>
-                    <input type='text' class='form-control' value='$email' disabled>
-                </div>
-                
-                <div class='mb-4'>
-                    <label class='form-label'>To</label>
-                    <input type='text' class='form-control' value='admin@ncst.edu.ph' disabled>
+                <div class='row'>
+                    <div class='col-6 mb-4'>
+                        <label class='form-label'>From</label>
+                        <input type='text' class='form-control' value='$email' disabled>
+                    </div>
+                    
+                    <div class='col-6 mb-4'>
+                        <label class='form-label'>To</label>
+                        <input type='text' class='form-control' value='admin@ncst.edu.ph' disabled>
+                    </div>
                 </div>
                 
                 <div class='mb-4'>

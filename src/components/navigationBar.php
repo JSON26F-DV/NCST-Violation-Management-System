@@ -29,7 +29,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #e4e6ea;
+            background-color: #e4e6eac2;
             color: #65676b;
             transition: all 0.2s ease;
             position: relative;
@@ -199,14 +199,14 @@
 </head>
 <body>
     <!-- Facebook-style Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top facebook-navbar">
+    <nav class="navbar navbar-expand-lg fixed-top facebook-navbar bg-primary">
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
                 <img src="/ncst/public/assets/ncstLogo.png"  alt="NCST Logo" height="35">
             </a>
             <div class="flex_centered mt-2 position-relative">
-              <h4>NCST</h4>
+              <h4 class="text-warning">NCST</h4>
                 <span class="badge office">office</span>
             </div>
             
