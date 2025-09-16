@@ -2,6 +2,7 @@
     session_start();
     include('../../../../header.php');
     include('../../../components/navigationBar.php');
+    include('student_mail.php');
 ?>
 
 <style>
@@ -196,7 +197,7 @@
                         </div>
 
                         <div class='d-flex justify-content-between align-items-center mt-3'>
-                        <button class='btn btn-primary w-100 overflow-hidden' data-bs-toggle='modal' data-bs-target='#profileModal'>Edit Profile</button>
+                            <button class='btn btn-primary w-100 overflow-hidden' data-bs-toggle='modal' data-bs-target='#profileModal'>Edit Profile</button>
                         </div>
                     </div>
                 </div>

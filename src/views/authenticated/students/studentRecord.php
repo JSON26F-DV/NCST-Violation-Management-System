@@ -245,5 +245,6 @@
 
 
 <?php
+    include('student_mail.php');
     include('../../../../footer.php');
 ?>

@@ -236,17 +236,24 @@
 
                     <!-- Notifications -->
                     <li class="nav-item">
-                            <details class="profile-dropdown">
-                                        <summary title='Account'>
-                                            <span class='iconify' data-icon='fluent-color:alert-28' data-width='25px'></span>
-                                            <span class='notification-badge'>3</span>
-                                        </summary>
-                                            <div class='dropdown-menu-custom drop-notification'>
-                                                <?php
-                                                    include("../authenticated/students/student_mail.php");
-                                                ?>
-                                            </div>
-                        </details>
+
+                        <button  type="button"   class="nav-link" data-bs-toggle="modal" id="notifBtn">
+                        <?php
+                        $sql = "SELECT COUNT(*) AS unread 
+                                FROM Mail_log 
+                                WHERE status != 'pending'
+                                AND student_read = 0";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $unread = $row['unread'];
+                            echo"
+                                <span class='iconify' data-icon='fluent-color:alert-28' data-width='25px'></span>
+                            ";  
+                            if ($unread > 0) {
+                                echo "<span class='notification-badge'>$unread</span>";
+                            }
+                        ?>
+                        </button>
                     </li>
 
                     <!-- Profile Dropdown -->
