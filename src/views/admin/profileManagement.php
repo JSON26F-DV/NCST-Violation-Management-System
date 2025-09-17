@@ -357,10 +357,8 @@
                     <div class='row g-0'>
                         <!-- Left Column - Profile Picture & Info -->
                         <div class='col-lg-4 p-4' style='background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);'>
-
-
                             <!-- User Information Cards -->
-                             <?php
+                            <?php
                                 echo"
                                     <div class='card shadow-sm rounded-4'>
                                         <div class='bg-light-blue p-4 text-center d-flex flex-column'>
@@ -424,15 +422,15 @@
                                     //DOCUMENTS & REQUIREMENT
                                     $hasBirthCertificate = isset($_POST['hasBirthCertificate']) ? 1 : 0;
                                     $hasGoodMoral = isset($_POST['hasGoodMoral']) ? 1 : 0;
-                                    $reportCard = isset($_POST['reportCard']) ? 1 : 0;
-                                    $idPicture = isset($_POST['idPicture']) ? 1 : 0;
-                                    $medicalRecord = isset($_POST['medicalRecord']) ? 1 : 0;
-                                    $form137 = isset($_POST['form137']) ? 1 : 0;
+                                    $hasReportCard = isset($_POST['hasReportCard']) ? 1 : 0;
+                                    $hasIDPicture = isset($_POST['hasIDPicture']) ? 1 : 0;
+                                    $hasMedical_record = isset($_POST['hasMedical_record']) ? 1 : 0;
+                                    $hasForm137 = isset($_POST['hasForm137']) ? 1 : 0;
 
 
                                     $stmt = $conn->prepare("UPDATE students SET
                                         first_name=?, middle_name=?, last_name=?, birthday=?, sex=?, religion=?, nationality=?,
-                                        guardian=?, student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?
+                                        guardian=?, student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?, hasBirthCertificate=?, hasGoodMoral=?, hasReportCard=? ,hasIDPicture=?, hasMedical_record=?, hasForm137=?
                                         WHERE student_id=?
                                     ");
 
@@ -441,18 +439,20 @@
                                     }
 
                                     $stmt->bind_param(
-                                        "ssssssssissssii", 
+                                        "ssssssssissssdiiiiiii", 
                                         $first_name, $middle_name, $last_name, $birthday, $sex, $religion, $nationality,
-                                        $guardian, $student_credits, $course, $year_level, $student_id, $student_status, $academic_standing, $current_gpa
+                                        $guardian, $student_credits, $course, $year_level, $student_status, $academic_standing, $current_gpa, $hasBirthCertificate, $hasGoodMoral, $hasReportCard, $hasIDPicture, $hasMedical_record, $hasForm137,$student_id
                                     );
 
                                     if (!$stmt->execute()) {
-                                        echo "<script>alert('Execute failed: " . $stmt->error . "');</script>";
+                                        echo "Execute failed: " . $stmt->error;
                                     } else {
-                                        echo "<script>alert('Update success');</script>";
+                                        echo "<script>
+                                            alert('Update success');
+                                            window.location.href='accountAuditing.php';
+                                        </script>";
                                     }
-
-                                    $stmt->close();
+                                $stmt->close();
                                 }
                                 echo"
                                     <form method='post'>
@@ -582,7 +582,7 @@
                                                 <div class='row g-4'>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='hasBirthCertificate' name='hasBirthCertificate' value='$hasBirthCertificate' checked>
+                                                            <input class='form-check-input' type='checkbox' id='hasBirthCertificate' name='hasBirthCertificate' " . ($hasBirthCertificate ? "checked" : "") . ">
                                                             <label class='form-check-label fw-semibold' for='birthCertificate'>
                                                                 Birth Certificate
                                                             </label>
@@ -590,7 +590,7 @@
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='hasBirthCertificate' name='hasBirthCertificate' value='$hasGoodMoral' checked>
+                                                            <input class='form-check-input' type='checkbox' id='hasGoodMoral' name='hasGoodMoral' value='1' " . ($hasBirthCertificate ? "checked" : "") . ">
                                                             <label class='form-check-label fw-semibold' for='goodMoral'>
                                                                 Good Moral Certificate
                                                             </label>
@@ -598,7 +598,7 @@
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='reportCard'>
+                                                            <input class='form-check-input' type='checkbox' id='hasReportCard' name='hasReportCard' value='1' " . ($hasReportCard ? "checked" : "") . ">
                                                             <label class='form-check-label fw-semibold' for='reportCard'>
                                                                 Report Card
                                                             </label>
@@ -606,15 +606,15 @@
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='idPicture' checked>
-                                                            <label class='form-check-label fw-semibold' for='idPicture'>
+                                                            <input class='form-check-input' type='checkbox' id='hasIDPicture' name='hasIDPicture' value='1' " . ($hasIDPicture ? "checked" : "") . ">
+                                                            <label class='form-check-label fw-semibold' for='hasIDPicture'>
                                                                 ID Picture
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='medicalRecord'>
+                                                            <input class='form-check-input' type='checkbox' id='hasMedical_record' name='hasMedical_record' value='1' " . ($hasMedical_record ? "checked" : "") . ">
                                                             <label class='form-check-label fw-semibold' for='medicalRecord'>
                                                                 Medical Record
                                                             </label>
@@ -622,8 +622,8 @@
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' id='form137' checked>
-                                                            <label class='form-check-label fw-semibold' for='form137'>
+                                                            <input class='form-check-input' type='checkbox' id='hasForm137'  name='hasForm137' value='1' " . ($hasForm137 ? "checked" : "") . ">
+                                                            <label class='form-check-label fw-semibold' for='hasForm137'>
                                                                 Form 137
                                                             </label>
                                                         </div>
@@ -631,7 +631,7 @@
                                                 </div>
                                             </div>  
 
-                                            <!-- Financial Tab 
+                                            <!-- Financial Tab -->
                                             <div class='tab-pane fade' id='financial' role='tabpanel'>
                                                 <div class='row g-3'>
                                                     <div class='col-md-6'>
@@ -663,20 +663,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>-->
-
-                                        <!-- Footer -->
-                                        <div class='modal-footer d-flex gap-2'>
-                                            <button type='button' class='btn btn-outline-secondary'>
-                                                <i class='bi bi-x-circle me-2'></i>Cancel
-                                            </button>
-                                            <button type='submit' class='btn btn-primary'>
-                                                <i class='bi bi-check-circle me-2'></i>Save Changes
-                                            </button>
-                                        </div>
-                                    </form>
-                                ";
-                            ?>
+                                            <!-- Footer -->
+                                                <div class='modal-footer d-flex gap-2'>
+                                                    <button type='button' class='btn btn-outline-secondary'>
+                                                        <i class='bi bi-x-circle me-2'></i>Cancel
+                                                    </button>
+                                                    <button type='submit' class='btn btn-primary'>
+                                                        <i class='bi bi-check-circle me-2'></i>Save Changes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        ";
+                                    ?>
+                                </div>
                         </div>
                     </div>
                 </div>
