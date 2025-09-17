@@ -2,7 +2,7 @@
     session_start();
     include('../../../../header.php');
     include('../../../components/navigationBar.php');
-    include('student_mail.php');
+
 ?>
 
 <style>
@@ -123,53 +123,13 @@
             $user_id = $_SESSION["student_id"];
             $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
             $row = $result->fetch_assoc();
-
-            // PERSONAL INFORMATION
-            $student_id        = $row['student_id'];
-            $first_name        = $row['first_name'];
-            $middle_name       = $row['middle_name'];
-            $last_name         = $row['last_name'];
-            $birthday          = $row['birthday'];
-            $sex               = $row['sex'];
-            $religion          = $row['religion'];
-            $nationality       = $row['nationality'];
-            $guardian          = $row['guardian'];
-            $email             = $row['email'];
-            $social_media      = $row['social_media'];
-            $address           = $row['address'];
-            $contact_number    = $row['contact_number'];
-            $profile = $row['profile_pic'];
-
-            // ACADEMIC INFORMATION
-            $student_credits   = $row['student_credits'];
-            $id                = $row['student_id'];
-            $student_id        = substr($student_id, 0, 4) . "-" . substr($student_id, 4);
-            $course            = $row['course'];
-            $year_level        = $row['year_level'];
-            $Status            = $row['status'];
-            $academic_standing = $row['academic_standing'];
-            $current_gpa       = $row['current_gpa'];
-
-            // FINANCIAL INFORMATION
-            $tuition_balance   = $row['tuition_balance'];
-            $next_payment_due  = $row['next_payment_due'];
-            $last_payment      = $row['last_payment'];
-            $scholarship       = $row['scholarship'];
-
-            // REQUIREMENTS & DOCUMENTS
-            $hasBirthCertificate = $row['hasBirthCertificate'];
-            $hasGoodMoral        = $row['hasGoodMoral'];
-            $hasReportCard       = $row['hasReportCard'];
-            $hasIDPicture        = $row['hasIDPicture'];
-            $hasMedical_record   = $row['hasMedical_record'];
-            $hasForm137          = $row['hasForm137'];
-
+            extract($row);
             echo "
                 <div class='card shadow-sm rounded-4'>
                     <div class='bg-light-blue p-4 text-center d-flex flex-column'>
                         <div class='user_content flex_centered mb-3 position-relative'>
                             <div class='user_picture overflow-hidden'>
-                            <img src='/ncst/public/uploads/profile/$profile' alt='profile' width='180px'>
+                            <img src='/ncst/public/uploads/profile/$profile_pic' alt='profile' width='180px'>
                             </div>
                             <div class='camera'>
                                 <span class='iconify' data-icon='fluent-color:camera-20' data-width='30px'></span> 
@@ -405,7 +365,7 @@
                                         </div>
                                         <div class='col-md-6'>
                                             <label class='form-label  small fw-semibold text-black'>Status</label>
-                                            <p class='mb-0 text-dark'>$Status</p>
+                                            <p class='mb-0 text-dark'>$student_status</p>
                                         </div>
                                         <div class='col-md-6'>
                                             <label class='form-label  small fw-semibold text-black'>Academic Standing</label>
@@ -503,5 +463,6 @@
 </main>
 
 <?php
+    include('student_mail.php');
     include('../../../../footer.php');
 ?>

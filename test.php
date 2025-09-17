@@ -1,36 +1,19 @@
-<?php
-    include("header.php");
-?>
+                                    $stmt = $conn->prepare("UPDATE students SET
+                                        first_name=?, middle_name=?, last_name=?, birthday=?, sex=?, religion=?, nationality=?,
+                                        guardian=?, student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?,
+                                        hasBirthCertificate=?, hasGoodMoral=?, hasReportCard=?, hasIDPicture=?, hasMedical_record=?, hasForm137=?
+                                        WHERE student_id=?
+                                    ");
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Data</title>
-  </head>
-  <body>
-    <table border = 1 cellspacing = 0 cellpadding = 10>
-      <tr>
-        <td>#</td>
-        <td>Name</td>
-        <td>Image</td>
-      </tr>
-<?php
-$result = mysqli_query($conn, "SELECT * FROM tb_upload ORDER BY id DESC");
-?>
-<?php while ($row = mysqli_fetch_assoc($result)) : ?>
-<tr>
-  <td><?php echo $i++; ?></td>
-  <td><?php echo $row["name"]; ?></td>
-  <td><img src="/ncst/public/uploads/profile/<?php echo $row['image']; ?>" alt="profile"></td>
-</tr>
-<?php endwhile; ?>
 
-    </table>
-    <br>
-    <a href="test2.php">Upload Image File</a>
-  </body>
-</html>
-<?php
-    include("footer.php");
-?>
+                                    if (!$stmt) {
+                                        echo "<script>alert('Prepare failed: " . $conn->error . "');</script>";
+                                    }
+
+                                    $stmt->bind_param(
+                                        "ssssssssisisdiiiiii",
+                                        $first_name, $middle_name, $last_name, $birthday, $sex, $religion, $nationality,
+                                        $guardian, $student_credits, $course, $year_level, $student_status, $academic_standing, $current_gpa,
+                                        $hasBirthCertificate, $hasGoodMoral, $hasReportCard, $hasIDPicture, $hasMedical_record, $hasForm137,
+                                        $student_id
+                                    );

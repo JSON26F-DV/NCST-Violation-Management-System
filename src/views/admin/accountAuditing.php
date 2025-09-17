@@ -1,6 +1,7 @@
 <?php
     include('../../../header.php');
     include('navbar.php');
+
 ?>
 <style>
     body {
@@ -77,7 +78,6 @@
 
 
     <div class="row g-4">
-
         <?php
             $sql  = ("SELECT * FROM students");
             $result = $conn->query($sql);
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class='d-flex gap-1 d-md-flex justify-content-md-center'>
-                                    <a href='../authenticated/students/profileManagement.php?id={$row->student_id}' class='btn btn-outline-success btn-sm me-md-2 rounded-3'><i class='iconify' data-icon='fluent-color:document-edit-24' data-width='30px'></i> Update</a>
+                                    <a href='profileManagement.php?id={$row->student_id}' class='btn btn-outline-success btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-edit-24' data-width='30px' ></i> Update</a href='profileManagement.php'>
                                     <button class='btn btn-outline-primary btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-folder-24' data-width='30px' ></i> Manage</button>
                                 </div>
                             </div>

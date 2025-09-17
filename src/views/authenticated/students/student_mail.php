@@ -54,7 +54,7 @@
                       $message='Your request is pending review by Student Affairs. View details ›';
                       $alertClass = "alert-secondary";
                       break;
-              }
+              } 
             }
           
             echo"
