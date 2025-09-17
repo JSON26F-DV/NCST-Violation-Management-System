@@ -427,10 +427,17 @@
                                     $hasMedical_record = isset($_POST['hasMedical_record']) ? 1 : 0;
                                     $hasForm137 = isset($_POST['hasForm137']) ? 1 : 0;
 
+                                    //FINANCIAL INFORMATION
+                                    $scholarship = $_POST['scholarship'];
+                                    $tuition_balance = $_POST['tuition_balance'];
+                                    $next_payment_due = $_POST['next_payment_due'];
+                                    $last_payment = $_POST['last_payment'];
 
                                     $stmt = $conn->prepare("UPDATE students SET
-                                        first_name=?, middle_name=?, last_name=?, birthday=?, sex=?, religion=?, nationality=?,
-                                        guardian=?, student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?, hasBirthCertificate=?, hasGoodMoral=?, hasReportCard=? ,hasIDPicture=?, hasMedical_record=?, hasForm137=?
+                                        first_name=?, middle_name=?, last_name=?, birthday=?, sex=?, religion=?, nationality=?, guardian=?, 
+                                        student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?, 
+                                        hasBirthCertificate=?, hasGoodMoral=?, hasReportCard=? ,hasIDPicture=?, hasMedical_record=?, hasForm137=? , scholarship=?,
+                                        tuition_balance=?, next_payment_due=?, last_payment=?
                                         WHERE student_id=?
                                     ");
 
@@ -439,9 +446,9 @@
                                     }
 
                                     $stmt->bind_param(
-                                        "ssssssssissssdiiiiiii", 
+                                        "ssssssssissssdiiiiiisissi", 
                                         $first_name, $middle_name, $last_name, $birthday, $sex, $religion, $nationality,
-                                        $guardian, $student_credits, $course, $year_level, $student_status, $academic_standing, $current_gpa, $hasBirthCertificate, $hasGoodMoral, $hasReportCard, $hasIDPicture, $hasMedical_record, $hasForm137,$student_id
+                                        $guardian, $student_credits, $course, $year_level, $student_status, $academic_standing, $current_gpa, $hasBirthCertificate, $hasGoodMoral, $hasReportCard, $hasIDPicture, $hasMedical_record, $hasForm137, $scholarship, $tuition_balance, $next_payment_due, $last_payment, $student_id
                                     );
 
                                     if (!$stmt->execute()) {
@@ -498,7 +505,7 @@
                                                             </div>
                                                             <div class='col-md-6'>
                                                                 <label for='birthday' class='form-label'>Birthday</label>
-                                                                <input type='date' class='form-control' id='birthday' name='    birthday' value='$birthday'>
+                                                                <input type='date' class='form-control' id='birthday' name='birthday' value='$birthday'>
                                                             </div>
                                                             <div class='col-md-6'>
                                                                 <label for='sex' class='form-label'>Sex</label>
@@ -528,7 +535,7 @@
                                                 <div class='row g-3'>
                                                     <div class='col-md-6'>
                                                         <label for='studentCredits' class='form-label'>Student Credits</label>
-                                                        <input type='number' class='form-control' id='student_credits' name='student_credits' value='$student_credits'>
+                                                        <input type='number' class='form-control' id='student_credits' name='student_credits' value='$student_credits' min='60' max='100'>
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <label for='course' class='form-label'>Course</label>
@@ -635,39 +642,40 @@
                                             <div class='tab-pane fade' id='financial' role='tabpanel'>
                                                 <div class='row g-3'>
                                                     <div class='col-md-6'>
-                                                        <label for='tuitionBalance' class='form-label'>Tuition Balance</label>
+                                                        <label for='tuition_balance' class='form-label'>Tuition Balance</label>
                                                         <div class='input-group'>
                                                             <span class='input-group-text'>₱</span>
-                                                            <input type='number' class='form-control' id='tuitionBalance' value='25000'>
+                                                            <input type='number' class='form-control' id='tuition_balance' name='tuition_balance' value='$tuition_balance'>
                                                         </div>
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <label for='nextPaymentDue' class='form-label'>Next Payment Due</label>
-                                                        <input type='date' class='form-control' id='nextPaymentDue' value='2024-03-15'>
+                                                        <input type='date' class='form-control' id='next_payment_due' name='next_payment_due' value='$next_payment_due'>
                                                     </div>
                                                     <div class='col-md-6'>
-                                                        <label for='lastPayment' class='form-label'>Last Payment</label>
+                                                        <label for='last_payment' class='form-label'>Last Payment</label>
                                                         <div class='input-group'>
                                                             <span class='input-group-text'>₱</span>
-                                                            <input type='number' class='form-control' id='lastPayment' value='15000'>
+                                                            <input type='datetime-local' class='form-control' name='last_payment' value='" . date('Y-m-d\TH:i', strtotime($last_payment)) . "'>
                                                         </div>
                                                     </div>
                                                     <div class='col-md-6'>
                                                         <label for='scholarship' class='form-label'>Scholarship</label>
-                                                        <select class='form-select' id='scholarship'>
-                                                            <option value='None'>None</option>
-                                                            <option value='Academic' selected>Academic</option>
-                                                            <option value='Athletic'>Athletic</option>
-                                                            <option value='Government'>Government</option>
+                                                        <select class='form-select' id='scholarship' name='scholarship'>
+                                                            <option value='None'" . ($scholarship=='None' ? " selected" : "") . ">None</option>
+                                                            <option value='Full'" . ($scholarship=='Full' ? " selected" : "") . ">Full</option>
+                                                            <option value='Partial'" . ($scholarship=='Partial' ? " selected" : "") . ">Partial</option>
+                                                            <option value='Athletic'" . ($scholarship=='Athletic' ? " selected" : "") . ">Athletic</option>
+                                                            <option value='Academic'" . ($scholarship=='Academic' ? " selected" : "") . ">Academic</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Footer -->
                                                 <div class='modal-footer d-flex gap-2'>
-                                                    <button type='button' class='btn btn-outline-secondary'>
+                                                    <a href='accountAuditing.php' class='btn btn-outline-secondary'>
                                                         <i class='bi bi-x-circle me-2'></i>Cancel
-                                                    </button>
+                                                    </a>
                                                     <button type='submit' class='btn btn-primary'>
                                                         <i class='bi bi-check-circle me-2'></i>Save Changes
                                                     </button>

@@ -112,6 +112,17 @@
   font-size: 20px;
   color: #333;
 }
+a {
+    text-decoration: none; /* removes underline */
+    color: inherit;        /* keeps current text color */
+}
+
+/* Or set a specific color */
+a {
+    text-decoration: none;
+    color: #333333;
+}
+
 </style>
 
     <!-- STUDENT PROFILE CONTENT -->
