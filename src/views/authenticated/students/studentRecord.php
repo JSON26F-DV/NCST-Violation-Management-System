@@ -37,6 +37,14 @@
             border-radius: 20px;
             padding: 8px 20px;
         }
+        a {
+            text-decoration: none; 
+            color: inherit;       
+        }
+        a {
+            text-decoration: none;
+            color: #333333;
+        }
     </style>
 
     <div class='container py-4 mt-5'>

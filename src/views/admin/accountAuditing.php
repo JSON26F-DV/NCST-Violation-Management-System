@@ -51,7 +51,7 @@
     }
 </style>
 
-<div class="container py-5">
+<div class="container ">
     <h1 class="text-center mb-5">Student Account Auditing</h1>
     
     <!-- SEARCH BAR TRALALA -->

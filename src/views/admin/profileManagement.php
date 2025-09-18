@@ -348,16 +348,14 @@
         <div class='row justify-content-center'>
             <div class='col-12 col-xl-10'>
                 <div class='profile-container'>
-                    <!-- Header -->
                     <div class='profile-header'>
                         <h2 class='mb-0 position-relative text-light'>Update Profile Information</h2>
                         <p class='mb-0 mt-2 opacity-75 position-relative text-light'>Keep your information current and secure</p>
                     </div>
 
                     <div class='row g-0'>
-                        <!-- Left Column - Profile Picture & Info -->
+                        <!-- USER PROFILE -->
                         <div class='col-lg-4 p-4' style='background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);'>
-                            <!-- User Information Cards -->
                             <?php
                                 echo"
                                     <div class='card shadow-sm rounded-4'>
@@ -396,7 +394,6 @@
                             ?>
                         </div>
 
-                        <!-- Right Column - Form Content -->
                         <div class='col-lg-8 p-4'>
                             <?php
                                 if($_SERVER['REQUEST_METHOD'] == 'POST') {

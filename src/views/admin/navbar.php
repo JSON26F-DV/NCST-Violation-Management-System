@@ -34,26 +34,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-1">
-                        <a class="nav-link d-flex align-items-center" href="accountAuditing.php">
+                        <a class="nav-link d-flex align-items-center" href="/ncst/src/views/admin/accountAuditing.php">
                             <i class="bi bi-people me-2"></i>
                             <span class="d-none d-lg-inline">Account Auditing</span>
                         </a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center" href="/ncst/src/views/admin/violation_cases.php">
                             <i class="bi bi-chat-left-text me-2"></i>
-                            <span class="d-none d-lg-inline">Chat</span>
+                            <span class="d-none d-lg-inline">Records</span>
                         </a>
                     </li>
                     <li class="nav-item mx-1 position-relative">
-                        <a class="nav-link d-flex align-items-center" href="admin_Notification.php">
+                        <a class="nav-link d-flex align-items-center" href="/ncst/src/views/admin/admin_Notification.php">
                             <i class="bi bi-bell me-2"></i>
                             <span class="d-none d-lg-inline">Notifications</span>
                             <span class="position-absolute notification-badge bg-danger text-white rounded-pill">3</span>
                         </a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link d-flex align-items-center text-danger" href="../guest/login/logout.php">
+                        <a class="nav-link d-flex align-items-center text-danger" href="/ncst/src/views/guest/login/logout.php">
                             <i class="bi bi-box-arrow-right me-2"></i>
                             <span class="d-none d-lg-inline">Logout</span>
                         </a>
@@ -63,7 +63,6 @@
         </div>
     </nav>
 
-    <!-- Spacer for fixed navbar -->
     <div style="height: 70px;"></div>
 
 

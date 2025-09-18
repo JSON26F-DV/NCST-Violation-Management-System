@@ -37,6 +37,13 @@
   <ul class='list-group list-group-flush p-2' style=' max-height: 500px; overflow-y: auto;'>
     <?php
         while ($row = $query->fetch_object()) {
+            if (($_SERVER['REQUEST_METHOD'] == 'GET')) {
+              $id = (int)$row->id;
+              $sql = "UPDATE Mail_log 
+                      SET student_read = 1 
+                      WHERE id = ";
+              
+            }
             $statusText = ($row->student_read == 0) ? 'UNREAD' : 'READ';
             $badgeClass = ($row->student_read == 0) ? 'bg-warning' : 'bg-secondary';  
             $state = ($row->status);
@@ -58,7 +65,8 @@
             }
           
             echo"
-              <a href='../../../forms/admin/mail_verdict.php?id={$row->id}'>
+            <form  method='get'>
+              <a href='../../../mails/student/mail_verdict.php?id={$row->id}'>
                 <li class='alert $alertClass  d-flex align-items-start'>
                     <img src='/ncst/public/uploads/profile/officer.png' width='50px' class='rounded-circle me-2' alt='User'>
                     <div class='flex-grow-1'>
@@ -68,6 +76,7 @@
                     </div>
                 </li>
               </a>
+            </form>
             ";
         }
         ?>

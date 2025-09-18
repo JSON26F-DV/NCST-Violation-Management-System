@@ -1,5 +1,6 @@
 <?php
     include('../../../header.php');
+    include('../../components/navigationBar.php');
 ?>
     <style>
         body {
@@ -27,13 +28,15 @@
         .signature {
             margin-top: 2.5rem;
         }
+        .top-offset {
+            margin-top: 50px;
+        }
     </style>
-</head>
-<body>
-    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 p-3 flex-column">
+
+    <div class=" top-offset container-fluid d-flex justify-content-center align-items-center min-vh-100 p-3 flex-column ">
         <div class="document-card shadow">
     <div class="modal-content">
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-primary rounded-3">
                 <div class="d-flex flex-column align-items-center w-100 p-4">
                         <img src="/ncst/public/assets/ncstLogo.png" alt="NCST Logo" width="64" height="64" class="d-block">
                         <h4 class=" mb-1"><strong class='text-white'>NATIONAL COLLEGE OF SCIENCE AND TECHNOLOGY</strong></h4>
@@ -55,7 +58,17 @@
                     $body = $row['body'];
                     $profile_pic = $row['profile_pic']; 
                     $state = $row['status'];
+                    
                     $approvalStatus = ($state == "accepted") ? 'alert-success' : 'alert-danger';  
+
+                    if (isset($_GET['id'])) {
+                        $id = intval($_GET['id']); 
+                        $sql = "UPDATE Mail_log 
+                                SET student_read = 1 
+                                WHERE id = $id";
+                        $conn->query($sql);
+                    }
+
                     if($state == "accepted") {
                         echo "
                             <p>Dear Valued Student,</p>
@@ -109,5 +122,6 @@
     </div>
 
 <?php
+    include("../../views/authenticated/students/student_mail.php");
     include('../../../footer.php');
 ?>

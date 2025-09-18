@@ -43,10 +43,6 @@
                         <button type="submit" class="btn btn-outline-secondary btn-sm">Mark all as read</button>
                     </form>
                 </div>
-                
-                <?php
-
-?>
 
                 <?php
                     $sql = "SELECT m.*, s.profile_pic 
@@ -80,7 +76,7 @@
 
                         echo "
                         <div class='list-group'>
-                            <a href='../../forms/student/student_mail.php?id={$row->id}' class='list-group-item list-group-item-action mb-3 p-3 rounded-3 shadow-sm notification-card text-decoration-none' aria-current='false'>
+                            <a href='../../mails/admin/student_mail.php?id={$row->id}' class='list-group-item list-group-item-action mb-3 p-3 rounded-3 shadow-sm notification-card text-decoration-none' aria-current='false'>
                                 <div class='d-flex gap-3 align-items-start'>
                                     <div class='user_info d-flex justify-content-between w-100'>
                                         <div class='d-flex justify-content-between align-items-start gap-3'>

@@ -2,6 +2,7 @@
 <?php
     session_start();
     include('../../../header.php');
+    include('../../views/admin/navbar.php');
 ?>
 
     <style>
@@ -68,43 +69,55 @@
 
     </style>
 
-    <div class="container-fluid">
+
+    <div class="container">
         <div class="mail-container">
             <div class="mail-header">
                 <h4 class="mb-0 text-light">
                     <span class="icon-3d">📨</span> Student Violation Report
                 </h4>
-            </div>
-<?php
-    $sql = "SELECT * FROM Mail_log WHERE id = ".$_GET['id'];
-    $query = $conn->query($sql);
-    $row = $query->fetch_assoc();
+            </div>  
+            <?php
+                $sql = "SELECT * FROM Mail_log WHERE id = ".$_GET['id'];
+                $query = $conn->query($sql);
+                $row = $query->fetch_assoc();
 
-    $form = $row['form_id'];
-    $email = $row['email'];
-    $subject = $row['subject'];
-    $body = $row['body'];
-    $attachment = $row['attachment'];
-    $state = $row['status'];
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $id = intval($_GET['id']); 
+                $from_id = $row['from_id'];
+                $email = $row['email'];
+                $subject = $row['subject'];
+                $body = $row['body'];
+                $attachment = $row['attachment'];
+                $state = $row['status'];
+                $created_at = $row['created_at'];
+                
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        if(isset($_POST['decline'])){
-            $status = 'declined';
-        } elseif(isset($_POST['accepted'])){
-            $status = 'accepted';
-        }
+                    if(isset($_POST['decline'])){
+                        $status = 'declined';
+                    } elseif(isset($_POST['accepted'])){
+                        $status = 'accepted';
+                        $violation = "INSERT INTO violations (complainant_id, complainant_email, offense, description, attachment_id, date_reported) 
+                        VALUES ('$from_id', '$email', '$subject', '$body', '$id', '$created_at')";
 
-        if(isset($status)){
-            $sql = "UPDATE Mail_log SET status='$status', admin_read=1 WHERE id=".$_GET['id'];
-            if($conn->query($sql) == TRUE){
-                    header('Location: ../../views/admin/admin_Notification.php');
-                exit;
-            } else {
-                echo "Failed to update status";
-            }
-        }
-    }
+                        if ($conn->query($violation) === TRUE) {
+                            echo "<script>alert('Insert success'); window.location='../../views/admin/admin_Notification.php';</script>";
+                            exit();
+                        } else {
+                            echo "<script>alert('Insert failed: " . $conn->error . "');</script>";
+                        }
+                    }
+
+                    if(isset($status)){
+                        $sql = "UPDATE Mail_log SET status='$status', admin_read=1 WHERE id=".$_GET['id'];
+                        if($conn->query($sql) == TRUE){
+                                header('Location: ../../views/admin/admin_Notification.php');
+                            exit;
+                        } else {
+                            echo "Failed to update status";
+                        }
+                    }
+                }
 
     echo "
             <div class='mail-content'>

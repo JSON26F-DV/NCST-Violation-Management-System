@@ -2,7 +2,6 @@
     session_start();
     include('../../../../header.php');
     include('../../../components/navigationBar.php');
-
 ?>
 
 <style>
@@ -61,7 +60,7 @@
         border-radius: 50%;
         position: absolute;
         bottom: 0;
-        right: 55px;
+        right: 50px;
     }
 
     .popup-animate {
@@ -113,22 +112,23 @@
   color: #333;
 }
 a {
-    text-decoration: none; /* removes underline */
-    color: inherit;        /* keeps current text color */
+    text-decoration: none; 
+    color: inherit;        
 }
-
-/* Or set a specific color */
 a {
     text-decoration: none;
     color: #333333;
 }
+.top-offset {
+    margin-top: 50px;
+}
 
+    
 </style>
-
     <!-- STUDENT PROFILE CONTENT -->
-<main class="user_profile container my-5">
-    <div class="row g-4">
-        <div class="col-lg-4">
+<main class="user_profile container my-5 ">
+    <div class="row g-4 ">
+        <div class="col-lg-4  top-offset">
             <!-- STUDENT PROFILE -->
             <?php
             $user_id = $_SESSION["student_id"];
@@ -256,7 +256,7 @@ a {
 
                     echo"
                     <!-- SYSTEM STATUS -->
-                        <div class='col-12'>
+                        <div class='col-12  top-offset'>
                                 <div class='card shadow-sm rounded-4'>
                                     <div class='px-4 py-3 card_title'>
                                         <h5 class='fw-semibold text-dark mb-0 d-flex align-items-center gap-2 text-white'>
@@ -273,9 +273,6 @@ a {
                                                     <span class='bg-light text-$status  percentage flex_centered fs-1' >$student_credits</span>
                                                 </div>
 
-                                           <!-- <div class='user_credit bg-$status' >
-                                                        <span class='text-$status student_credits bg-light '>$student_credits</span>
-                                            </div>-->
                                             <div class='content d-flex flex-column mt-3'>
                                                     <h4 class='text-center text-$status'>$violation_status</h4>
                                                     <p><strong>Description</strong>: $Description</p>

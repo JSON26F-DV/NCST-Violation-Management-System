@@ -222,7 +222,7 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <!-- Student Records -->
                     <li class="nav-item">
-                        <a class="nav-link" href="studentRecord.php" title="Student Records">
+                        <a class="nav-link" href="/ncst/src/views/authenticated/students/studentRecord.php" title="Student Records">
                             <span class='iconify' data-icon='fluent-color:news-24' data-width='35px'></span>
                         </a>
                     </li>
@@ -236,7 +236,6 @@
 
                     <!-- Notifications -->
                     <li class="nav-item">
-
                         <button  type="button"   class="nav-link" data-bs-toggle="modal" id="notifBtn">
                         <?php
                         $sql = "SELECT COUNT(*) AS unread 
@@ -263,7 +262,7 @@
                                 <span class='iconify' data-icon='fluent-color:person-28' data-width='25px'></span>
                             </summary>
                             <div class="dropdown-menu-custom">
-                                <a href="userProfile.php" class="dropdown-item-custom">
+                                <a href="/ncst/src/views/authenticated/students/userProfile.php" class="dropdown-item-custom">
                                     <i class="fas fa-user"></i>
                                     Profile
                                 </a>
@@ -281,7 +280,7 @@
                                     Settings
                                 </a>
                                 <div class="dropdown-divider-custom"></div>
-                                <a href="../../guest/login/logout.php" class="dropdown-item-custom">
+                                <a href="/ncst/src/views/guest/login/logout.php" class="dropdown-item-custom">
                                     <i class="fas fa-sign-out-alt"></i>
                                     Log Out
                                 </a>
