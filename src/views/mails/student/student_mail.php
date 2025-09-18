@@ -63,7 +63,7 @@
             max-height: 300px;
             border-radius: 4px;
         }
-    </style>
+</style>
 
 
 <div class="container">

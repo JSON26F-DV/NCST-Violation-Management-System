@@ -66,7 +66,7 @@
           
             echo"
             <form  method='get'>
-              <a href='../../../mails/student/mail_verdict.php?id={$row->id}'>
+              <a href='../../mails/student/mail_verdict.php?id={$row->id}'>
                 <li class='alert $alertClass  d-flex align-items-start'>
                     <img src='/ncst/public/uploads/profile/officer.png' width='50px' class='rounded-circle me-2' alt='User'>
                     <div class='flex-grow-1'>

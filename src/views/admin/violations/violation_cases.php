@@ -1,6 +1,5 @@
  <?php
-    include('navbar.php');
-    include("../../../header.php");
+    include_once __DIR__ . '/../layouts/header_admin.php';
 ?>
  
  <style>
@@ -81,7 +80,6 @@
                                 <span class="status-badge status-pending">Pending</span>
                             </div>
                         </div>
-                        
                         <a href="#" class="btn btn-link ps-0 mt-2 flex_centered">View Details <i class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></i></a>
                     </div>
                 </div>
@@ -100,5 +98,5 @@
     </script>
 
 <?php
-    include("../../../footer.php");
+    include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>

@@ -1,8 +1,6 @@
 
 <?php
-    session_start();
-    include('../../../header.php');
-    include('../../views/admin/navbar.php');
+    include_once __DIR__ . '/../../admin/layouts/header_admin.php';
 ?>
 
     <style>
@@ -188,5 +186,5 @@
     </div>
 
 <?php
-    include('../../../footer.php');
+    include('/ncst/footer.php');
 ?>

@@ -122,6 +122,6 @@
     </div>
 
 <?php
-    include("../../views/authenticated/students/student_mail.php");
-    include('../../../footer.php');
+    include("../../authenticated/students/student_mail.php");
+    include('/ncst/footer.php');
 ?>

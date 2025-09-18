@@ -1,6 +1,7 @@
 <?php
-    include('src/config/config.php');
+    $configPath = __DIR__ . "/../../../config/config.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +14,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    
-    <?php
-    if (!isset($_SESSION["student_id"]) || empty($_SESSION["student_id"])) {
-        echo "<script>
-            alert('Please Login first to continue');
-            window.location.href = '/ncst/src/views/guest/login/loginPage.php';
-        </script>";
-        exit;
+<?php
+    session_start();
+
+    if (isset($_SESSION["student_id"]) && !empty($_SESSION["student_id"])) {
+        header("Location: /ncst/src/views/authenticated/students/userProfile.php");
+        exit();
     }
-        $user_id = $_SESSION["student_id"];
-        $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
-        $row = $result->fetch_assoc();
-        extract($row);
-        
-    ?>
+?>

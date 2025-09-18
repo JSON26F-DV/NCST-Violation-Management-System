@@ -1,8 +1,6 @@
 <?php
-    session_start();
-     include("../../../../header.php");
-?> 
-
+  include_once("layouts/header_guest.php");
+?>
 <style>
   .flex_centered {
     display: flex;
@@ -287,7 +285,7 @@
 
           <div class="form-footer">
             <a class="login-link" href="#">
-              Don't have account yet? <span>Login</span>
+              Don't have account yet? <span>register</span>
             </a>
           </div>
         </form>
@@ -318,5 +316,5 @@
 </script>
     
 <?php    
-    include("../../../../footer.php");
+    include("layouts/footer_guest.php");
 ?>

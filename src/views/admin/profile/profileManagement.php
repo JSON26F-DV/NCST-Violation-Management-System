@@ -1,5 +1,5 @@
 <?php
-   include('../../../header.php');
+     include_once __DIR__ . '/../layouts/header_admin.php';
 
     $sql = "SELECT * FROM students WHERE student_id = ".$_GET['id'];
     $result = $conn->query($sql);
@@ -669,7 +669,7 @@
                                             </div>
                                             <!-- FOOTER --!>
                                                 <div class='modal-footer d-flex gap-2'>
-                                                    <a href='accountAuditing.php' class='btn btn-outline-secondary'>
+                                                    <a href='../auditing/accountAuditing.php' class='btn btn-outline-secondary'>
                                                         <i class='bi bi-x-circle me-2'></i>Cancel
                                                     </a>
                                                     <button type='submit' class='btn btn-primary'>
@@ -689,5 +689,5 @@
 
 
 <?php
-   include("../../../footer.php");
+    include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>

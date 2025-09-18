@@ -1,8 +1,5 @@
 <?php
-    session_start();
-
-    include("../../../header.php");
-    include $_SERVER['DOCUMENT_ROOT'].'/ncst/src/views/admin/navbar.php';
+    include_once __DIR__ . '/../layouts/header_admin.php';
 ?>
     <style>
         body {
@@ -52,6 +49,7 @@
             margin: 0;
         }
     </style>
+    
 </head>
 <body>
 
@@ -260,5 +258,5 @@
     </div>
 
 <?php
-    include("../../../footer.php");
+     include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>
