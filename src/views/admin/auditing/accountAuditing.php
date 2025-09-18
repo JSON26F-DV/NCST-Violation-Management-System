@@ -1,7 +1,6 @@
 <?php
-    include('../../../header.php');
-    include('navbar.php');
-
+    include_once __DIR__ . '/../layouts/header_admin.php';
+    include('layouts/navbar.php');
 ?>
 <style>
     body {
@@ -51,7 +50,7 @@
     }
 </style>
 
-<div class="container ">
+<div class="container mb-5">
     <h1 class="text-center mb-5">Student Account Auditing</h1>
     
     <!-- SEARCH BAR TRALALA -->
@@ -112,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class='d-flex gap-1 d-md-flex justify-content-md-center'>
-                                    <a href='profileManagement.php?id={$row->student_id}' class='btn btn-outline-success btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-edit-24' data-width='30px' ></i> Update</a href='profileManagement.php'>
+                                    <a href='/ncst/src/views/admin/profile/profileManagement.php?id={$row->student_id}' class='btn btn-outline-success btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-edit-24' data-width='30px' ></i> Update</a href='profileManagement.php'>
                                     <button class='btn btn-outline-primary btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-folder-24' data-width='30px' ></i> Manage</button>
                                 </div>
                             </div>
@@ -125,5 +124,5 @@
 </div>
 
 <?php
-    include('../../../footer.php');
+    include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>

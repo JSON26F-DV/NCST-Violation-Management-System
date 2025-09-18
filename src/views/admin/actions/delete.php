@@ -1,6 +1,5 @@
 <?php
-    include('../../../header.php');
-
+    include_once __DIR__ . '/../layouts/header_admin.php';
     $sql = "SELECT * FROM students WHERE student_id = ".$_GET['id'];
     $query = $conn->query($sql);
     $result = $query->fetch_object();
@@ -37,5 +36,5 @@
         </form>
     </div>
 <?php
-    include('../../../footer.php');
+    include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>

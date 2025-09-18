@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include('../../../../header.php');
+    include_once('../../../../header.php');
+    require('student_status.php');
     include('../../../components/navigationBar.php');
 ?>
 
@@ -125,16 +125,13 @@ a {
 
     
 </style>
+
     <!-- STUDENT PROFILE CONTENT -->
 <main class="user_profile container my-5 ">
     <div class="row g-4 ">
         <div class="col-lg-4  top-offset">
             <!-- STUDENT PROFILE -->
-            <?php
-            $user_id = $_SESSION["student_id"];
-            $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
-            $row = $result->fetch_assoc();
-            extract($row);
+        <?php
             echo "
                 <div class='card shadow-sm rounded-4'>
                     <div class='bg-light-blue p-4 text-center d-flex flex-column'>
@@ -179,81 +176,7 @@ a {
         <div class="col-lg-8">
             <div class="row g-4">
                 <?php
-                    $status                 = 'green'; 
-                    $violation_status       = '';
-                    $Description            = '';
-                    $access                 = '';
-
-                    //CLEARANCE
-                    $clearance              = 'OK';
-                    $pendingStatus          = 'success';
-                    
-                    //CERTIFICATE
-                    $requests_certificate   = 'Allowed';
-                    $requests_status        = 'success';
-
-                    //ENROLLMENT
-                    $Enrollment             = 'Allowed';
-                    $isallowed              = 'success';
-
-                    if (isset($student_credits)) {
-                        switch (true) {
-                            case ($student_credits >= 90):
-                                $status = 'green';
-                                $violation_status       =   'Clear / No Violation';
-                                $Description            = 'Student has no record of misconduct.';
-                                $access                 = 'Full access to all school services (library, enrollment, good moral certificate, events).';
-                                break;
-                            case ($student_credits >= 80):
-                                //STATUS
-                                $status                 = 'yellow';
-                                $violation_status       = 'Minor Violation';
-                                $Description            = 'Student committed small offenses (e.g., tardiness, dress code issues).';
-                                $access                 = 'Normal access, but receives a warning. Records kept for monitoring.';
-                                
-                                //CLEARANCE
-                                $clearance              = 'Pending';
-                                $pendingStatus          = 'warning';
-                                break;
-                            case ($student_credits >= 70):
-                                $status                 = 'red';
-                                $violation_status       = 'Needs Clearance';
-                                $Description            = 'Student has multiple or moderate violations (e.g., cutting classes, disrespect, repeated tardiness).';
-                                $access                 = 'Cannot request good moral certificate or clearance for internships until settled with guidance office.';
-
-                                //CLEARANCE
-                                $clearance              = 'Pending';
-                                $pendingStatus          = 'warning';
-
-                                //CERTIFICATE
-                                $requests_certificate   =  'Denied';
-                                $requests_status        =    'danger';
-                                break;
-                            case ($student_credits <= 67):
-                                $status                 = 'red';
-                                $violation_status       = 'Banned';
-                                $Description            = 'Student committed serious violations (e.g., cheating, bullying, vandalism).';
-                                $access                 = 'Blocked from enrollment, events, and clearance requests. Must face disciplinary action before regaining access';
-
-                                //CLEARANCE
-                                $clearance              = 'Denied';
-                                $pendingStatus          = 'danger';
-                                
-                                //CERTIFICATE
-                                $requests_certificate   = 'Denied';
-                                $requests_status        = 'danger';
-
-                                //ENROLLMENT
-                                $Enrollment             = 'Denied';
-                                $isallowed              = 'danger';
-                                break;
-                            default:
-                                $Enrollment             = 'Allowed';
-                                $isallowed              = 'success';
-                        }
-                    }
-                    
-
+                    $state = getStudentStatus($student_credits);
                     echo"
                     <!-- SYSTEM STATUS -->
                         <div class='col-12  top-offset'>
@@ -269,14 +192,14 @@ a {
                                     <div class='card-body'>
 
                                         <div class='container flex_centered flex-column mb-3'>
-                                                <div class='circle' style='background: conic-gradient($status  0% $student_credits%, #e9ecef $student_credits% 100%);''>
-                                                    <span class='bg-light text-$status  percentage flex_centered fs-1' >$student_credits</span>
+                                                <div class='circle' style='background: conic-gradient({$state['status']}  0% $student_credits%, #e9ecef $student_credits% 100%);''>
+                                                    <span class='bg-light text-{$state['status']}  percentage flex_centered fs-1' >$student_credits</span>
                                                 </div>
 
                                             <div class='content d-flex flex-column mt-3'>
-                                                    <h4 class='text-center text-$status'>$violation_status</h4>
-                                                    <p><strong>Description</strong>: $Description</p>
-                                                    <p><strong>Access</strong>: $access</p>
+                                                    <h4 class='text-center text-{$state['status']}'>{$state['violation_status']}</h4>
+                                                    <p><strong>Description</strong>: {$state['description']}</p>
+                                                    <p><strong>Access</strong>: {$state['access']}</p>
                                             </div>
                                         </div>
 
@@ -284,20 +207,20 @@ a {
                                             <div class='col-12'>
                                                 <div class='d-flex justify-content-between align-items-center'>
                                                     <span class='text-secondary fw-semibold text-black'>Clearance</span>
-                                                    <span class='badge bg-$pendingStatus status-badge'>$clearance</span>
+                                                    <span class='badge bg-{$state['pendingStatus']} status-badge'>{$state['clearance']}</span>
 
                                                 </div>
                                             </div>
                                             <div class='col-12'>
                                                 <div class='d-flex justify-content-between align-items-center'>
                                                     <span class='text-secondary fw-semibold text-black'>Certificate Requests</span>
-                                                    <span class='badge bg-$requests_status status-badge'>$requests_certificate</span>
+                                                    <span class='badge bg-{$state['requests_status']} status-badge'>{$state['requests_certificate']}</span>
                                                 </div>
                                             </div>
                                             <div class='col-12'>
                                                 <div class='d-flex justify-content-between align-items-center'>
                                                     <span class='text-secondary fw-semibold text-black'>Next Term Enrollment</span>
-                                                    <span class='badge bg-$isallowed status-badge'>$Enrollment</span>
+                                                    <span class='badge bg-{$state['isallowed']} status-badge'>{$state['Enrollment']}</span>
                                                 </div>
                                             </div>
                                         </div>
