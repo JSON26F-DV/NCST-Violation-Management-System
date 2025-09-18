@@ -1,5 +1,5 @@
 <?php
-    include("../../config/config.php");
+    require_once __DIR__ . "/../../../config/config.php";
             if(isset($_POST["signUp"])) {
             //PERSONAL INFORMATION
             $first_name = $_POST['first_name'];

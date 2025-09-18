@@ -114,7 +114,6 @@
 
 <div class='container py-5'>
     <!-- GOOD MORAL CERTIFICATION -->
-
     <?php
             $user_id = $_SESSION["student_id"];
             $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");

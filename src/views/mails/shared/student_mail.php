@@ -99,7 +99,7 @@
                         VALUES ('$from_id', '$email', '$subject', '$body', '$id', '$created_at')";
 
                         if ($conn->query($violation) === TRUE) {
-                            echo "<script>alert('Insert success'); window.location='../../views/admin/admin_Notification.php';</script>";
+                            echo "<script>alert('Insert success'); window.location='/ncst/src/views/admin/notifications/admin_Notification.php';</script>";
                         } else {
                             echo "<script>alert('Insert failed: " . $conn->error . "');</script>";
                         }

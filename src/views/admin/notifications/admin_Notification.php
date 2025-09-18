@@ -12,7 +12,8 @@
             margin-right: 12px;
         }
         .status-badge {
-            top:  10px;
+            position: absolute;
+            bottom:  0;
             right: 10px;
             font-size: 0.8rem;
             padding: 4px 8px;
@@ -47,34 +48,55 @@
         text-decoration: none !important;
         color: #333333;
     }
+    .time {
+        right: 12px;
+    }
     </style>
 
 <div class="container py-4">
     <header class="mb-5">
         <h1 class="display-5 fw-bold mb-4">Student Messages</h1>
-
-        <div class="d-flex flex-wrap gap-2 mb-4">
-            <button id="filter_pending" class="btn btn-outline-primary rounded-pill px-3 filter-btn active">
-                <i class='iconify' data-icon='fluent-color:apps-list-detail-24' data-width='30px'></i>  All 
-            </button>
-            <button id="filter_ongoing" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                <i class='iconify' data-icon='fluent-color:mail-clock-24' data-width='30px'></i>  Unread
-            </button>
-            <button id="filter_results" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                <i class='iconify' data-icon='fluent-color:text-bullet-list-square-sparkle-24' data-width='30px'></i>  Read
-            </button>
-        </div>
+        <form method="get">
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <button type="submit" id="filter_pending" class="btn btn-outline-primary rounded-pill px-3 filter-btn active">
+                    <i class='iconify' data-icon='fluent-color:apps-list-detail-24' data-width='30px'></i>  All 
+                </button>
+                <button type="submit" name="Unread" id="Unread" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
+                    <i class='iconify' data-icon='fluent-color:mail-clock-24' data-width='30px'></i>  Unread
+                </button>
+                <button type="submit" name="Read" id="Read" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
+                    <i class='iconify' data-icon='fluent-color:text-bullet-list-square-sparkle-24' data-width='30px'></i>  Read
+                </button>
+            </div>
+        </form>
     </header>
-
+    <div class='row g-4'>
         <?php
-            $sql = "SELECT m.*, s.profile_pic 
-                    FROM Mail_log m
-                    JOIN students s ON m.from_id = s.student_id ORDER BY created_at DESC";
-            $query = $conn->query($sql);
-            if(!$query){
-                die("Query failed: ".$conn->error);
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $sql = "SELECT m.*, s.profile_pic 
+                        FROM Mail_log m 
+                        JOIN students s ON m.from_id = s.student_id 
+                        ORDER BY created_at DESC";
+
+                if (isset($_GET["Unread"])) {
+                    $sql = "SELECT m.*, s.profile_pic 
+                            FROM Mail_log m 
+                            JOIN students s ON m.from_id = s.student_id 
+                            WHERE m.status = 'pending' 
+                            ORDER BY created_at DESC";
+                } elseif (isset($_GET["Read"])) {
+                    $sql = "SELECT m.*, s.profile_pic 
+                            FROM Mail_log m 
+                            JOIN students s ON m.from_id = s.student_id 
+                            WHERE m.status != 'pending' 
+                            ORDER BY created_at DESC";
+                }
+
+                $query = $conn->query($sql);
+                if (!$query) {
+                    die("Query failed: " . $conn->error);
+                }
             }
-            
                 while($row = $query->fetch_object()) {
                 $statusText = ($row->admin_read == 0) ? 'UNREAD' : 'READ';
                 
@@ -97,39 +119,39 @@
                 }
                 
             echo "
-                <div class='row g-4'>
-                    <div class='col-md-6 col-lg-4'>
-                    <div class='card border-0 shadow-sm rounded-4 card-hover h-100 position-relative'>
-                    <span class='status-badge status-pending position-absolute fw-bold'>$statusText</span>
-                            <div class='card-body p-4'>
-                                <div class='d-flex align-items-start  gap-2'>
-                                    <img src='/ncst/public/uploads/profile/{$row->profile_pic}' width='59px' alt='Student avatar' class='rounded-circle avatar'>
-                                    <div class='flex-column'>
-                                        <h5 class='card-title '>{$row->subject}</h5>
-                                        <h6 class='card-title overflow-hidden mb-2'>{$row->body}</h6>
-                                        <p class='text-muted small '>{$row->email} </p>
-                                        <a href='../../mails/admin/student_mail.php?id={$row->id}' class='btn btn-link'>
-                                            View Details 
-                                            <i class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></i>
-                                        </a>
-                                    </div>
-                                </div>
+                <div class='col-md-6 col-lg-4'>
+                    <a href='/ncst/src/views/mails/shared/student_mail.php?id={$row->id}'>
+                        <div class='d-flex border rounded-3 p-3 mb-2 bg-light position-relative'>
+                            <div class='flex-shrink-0'>
+                                <img src='/ncst/public/uploads/profile/{$row->profile_pic}' width='59px' class='rounded-circle' alt='Profile'>
+                            </div>
+                            <div class='flex-grow-1 mx-2'>
+                                <div class='fw-bold  w-75 overflow-hidden'>{$row->subject}</div>
+                                <div class='text-muted small overflow-hidden'>{$row->body}</div>
+                                <div class='text-muted small'>{$row->email}</div>
+                            </div>
+                            <p class='status-badge status-pending position-absolute fw-bold'>$statusText </p>
+                            <div class='text-end  small text-muted position-absolute time'>
+                                <div>$timeAgo</div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            ";
+                ";
             }
         ?>
-    <script>
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+
+    </div>
 </div>
+
+<script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
 
 <?php
     include_once __DIR__ . '/../layouts/footer_admin.php';

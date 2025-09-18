@@ -82,7 +82,20 @@
                         <a class="nav-link d-flex align-items-center flex_centered gap-2" href="/ncst/src/views/admin/notifications/admin_Notification.php">
                             <i class='iconify' data-icon='fluent-color:alert-32' data-width='30px'></i>
                             <span class="d-none d-lg-inline">Notifications</span>
-                            <span class="position-absolute flex_centered notification-badge bg-danger text-white rounded-circle">1</span>
+                                <?php
+                                $sql = "SELECT COUNT(*) AS unread 
+                                        FROM Mail_log 
+                                        WHERE status = 'pending'
+                                        AND admin_read = 0";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $unread = $row['unread'];
+                                    if ($unread > 0) {
+                                        echo "
+                                        <span class='position-absolute flex_centered notification-badge bg-danger text-white rounded-circle'>$unread</span>";
+                                    }
+                                ?>
+                            
                         </a>
                     </li>
                     <li class="nav-item mx-1">
