@@ -34,7 +34,7 @@
                 <!-- Header -->
                 <div class="d-flex align-items-center mb-4">
                     <h1 class="h4 mb-0">Student Messages</h1>
-                    <span class="badge bg-primary ms-3">5 Unread</span>
+                    <span class="badge bg-primary ms-3">1 Unread</span>
                 </div>
 
                 <!-- Bulk Actions -->

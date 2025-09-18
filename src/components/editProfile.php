@@ -76,7 +76,7 @@ echo "
                                 <div class='mb-4'>
                                     <div class='user_content flex_centered mb-1 position-relative'>
                                         <div class='user_picture overflow-hidden rounded-circle border border-4'>
-                                            <img src='/ncst/public/uploads/profile/$profile' alt='profile' width='180' height='180' class='object-fit-cover'>
+                                            <img src='/ncst/public/uploads/profile/$profile_pic' alt='profile' width='180' height='180' class='object-fit-cover'>
                                             </div>
                                             <div class='camera position-absolute z-100 bottom-0 end-12  rounded-circle p-2 shadow-sm border border-3 border-light' 
                                                 style='cursor: pointer; transform: translate(-10px, -10px);' 

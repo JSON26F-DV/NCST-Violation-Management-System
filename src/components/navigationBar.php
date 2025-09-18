@@ -180,12 +180,12 @@
             margin-bottom: 20px;
         }
         .office {
-          background-color: yellow;
-          position: absolute;
-          top: -8px;
-          right: -54px;
-          font-weight: bolder;
-          border-bottom-left-radius: 0;
+            background-color: yellow;
+            position: absolute;
+            top: -8px;
+            right: -60px;
+            font-weight: bolder;
+            border-bottom-left-radius: 0;
         }
         .notification {
             width: 400px;
@@ -207,7 +207,7 @@
             </a>
             <div class="flex_centered mt-2 position-relative">
               <h4 class="text-warning">NCST</h4>
-                <span class="badge office">office</span>
+                <span class="badge office">OFFICE</span>
             </div>
             
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 15, 2025 at 06:49 AM
+-- Generation Time: Sep 18, 2025 at 09:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,21 +29,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Mail_log` (
   `id` int(11) NOT NULL,
-  `from_id` bigint(20) NOT NULL,
-  `to_id` bigint(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `body` text DEFAULT NULL,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `body` text NOT NULL,
   `attachment` blob DEFAULT NULL,
-  `timestamp` datetime DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `student_read` tinyint(1) DEFAULT 0,
+  `admin_read` tinyint(1) DEFAULT 0,
+  `officer_sent` tinyint(1) DEFAULT 0,
+  `status` enum('pending','accepted','declined') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `Mail_log`
 --
 
-INSERT INTO `Mail_log` (`id`, `from_id`, `to_id`, `email`, `subject`, `body`, `attachment`, `timestamp`) VALUES
-(9, 202355878, 0, 'jason26f@gmail.com', 'sinapak nya ko huhuhu', 'tarala', 0x363863373936336365306561332e706e67, '2025-09-15 12:29:48');
+INSERT INTO `Mail_log` (`id`, `from_id`, `to_id`, `email`, `subject`, `body`, `attachment`, `created_at`, `student_read`, `admin_read`, `officer_sent`, `status`) VALUES
+(11112014, 202355851, 202355851, 'jason26f@gmail.com', 'bullying', 'sinapak ako ni vincent huhu', 0x363863626230623663376664352e706e67, '2025-09-18 07:11:50', 1, 1, 0, 'accepted');
 
 --
 -- Indexes for dumped tables
@@ -63,7 +67,7 @@ ALTER TABLE `Mail_log`
 -- AUTO_INCREMENT for table `Mail_log`
 --
 ALTER TABLE `Mail_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11112015;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,6 +2,7 @@
     session_start();
 
     include("../../../header.php");
+    include $_SERVER['DOCUMENT_ROOT'].'/ncst/src/views/admin/navbar.php';
 ?>
     <style>
         body {

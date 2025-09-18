@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2025 at 04:44 AM
+-- Generation Time: Sep 18, 2025 at 09:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,8 +66,14 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `first_name`, `middle_name`, `last_name`, `birthday`, `sex`, `religion`, `nationality`, `guardian`, `email`, `password`, `social_media`, `profile_pic`, `address`, `contact_number`, `student_credits`, `course`, `year_level`, `student_status`, `academic_standing`, `current_gpa`, `tuition_balance`, `next_payment_due`, `last_payment`, `scholarship`, `hasBirthCertificate`, `hasGoodMoral`, `hasReportCard`, `hasIDPicture`, `hasMedical_record`, `hasForm137`) VALUES
-(202355851, 'Jason', 'Verzosa', 'Begornia', '2005-03-15', 'male', 'Christianity', 'Filipino', 'Jane Doe', 'jasonbegornia@gmail.com', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', '', 0x363863393433333665316366382e706e67, 'San Francisco', '9945646355', 75, 'Bachelor of Science in Industrial Technology', '2nd', 'Active', 'Regular', 3.50, 5000.00, '2025-10-01', '2025-05-31 16:00:00', 'None', 1, 0, 1, 0, 1, 1),
-(202355852, 'azula', 'Penelope May', 'Kardashian', '1979-07-22', 'female', 'Accusantium in sint ', 'Dolorem deserunt sun', 'Quibusdam explicabo', 'jason26f@gmail.com', '$2y$10$z0OnNLqf9IWFINu.scobzOKaNGNb/AeB3O2.wOvEr4nRAX3x4laq.', 'jason26f', 0x363863376132306235363233632e6a7067, 'San Francisco Cavite etc', '9945646355', 100, 'Bachelor of Science in Hospitality Management', '1st', 'Active', 'Regular', 3.00, 5000.00, '2025-10-14', '2025-09-14 11:15:46', 'None', 1, 0, 1, 0, 0, 1);
+(202355851, 'Jason', 'Verzosa', 'Begornia', '2005-03-15', 'male', 'Christianity', 'Filipino', 'David Tan Begornia', 'jason26f@gmail.com', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'jassson26f-dv', 0x363863626162393834313339642e6a7067, 'General Trias Cavite', '9945646355', 75, 'Bachelor of Science in Industrial Technology', '2nd', 'Active', 'Regular', 1.00, 5000.00, '2025-10-01', '2025-05-31 16:00:00', 'Academic', 1, 0, 1, 0, 1, 1),
+(202355852, 'dondon', 'Julie', 'Patidongan', '1998-11-28', 'male', 'Christianity', 'Filipino', 'atong ang', 'dondon@gmail.com', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'Mr.Julie Aguilar', 0x363863626137323235393537372e6a706567, 'San Nicolas, Batangas', '9945321789', 80, 'Bachelor of Science in Hospitality Management', '4th', 'Active', 'Probation', 3.00, 5000.00, '2025-10-01', '2025-05-31 16:00:00', 'Full', 1, 1, 1, 1, 1, 1),
+(202355853, 'Staring', 'Into', 'Soul', '2019-04-01', 'other', 'Ceiling Worshipper', 'Meownese', 'Mr. Whiskerson', 'staring.cat@meme.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://facebook.com/staringcat', 0x363863626137383537633265342e706e67, 'Box No. 4, Living Room, Couch City', '09123456789', 69, 'Bachelor of Arts in Communication', '2nd', 'Active', 'Probation', 1.23, 99999.99, '2025-10-18', '2025-09-18 06:11:41', 'None', 0, 1, 0, 1, 0, 0),
+(202355854, 'Princess', '', 'Azula', '2000-05-14', 'female', 'Agni Worship', 'Fire Nation', 'Fire Lord Ozai', 'azula@royal.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://instagram.com/lightning_queen', 0x363863626137623535376430332e6a7067, 'Royal Palace, Caldera City', '09001112222', 666, 'Bachelor of Arts in Communication', '3rd', 'Active', 'Irregular', 3.95, 9999.99, '2025-10-18', '2025-09-18 06:14:37', 'Athletic', 1, 0, 1, 1, 0, 1),
+(202355855, '9L36KDys', 'Clara', 'oq8vRll', '2003-02-14', 'female', 'Catholic', 'Filipino', 'Ana Santos', 'maria.santos@student.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://facebook.com/mariaclara', 0x363863626232396462363961362e706e67, '123 Mabini St., Manila, Philippines', '09171234567', 24, 'Bachelor of Science in Nursing', '1st', 'Active', 'Regular', 2.85, 15000.00, '2025-10-18', '2025-09-18 06:21:12', 'Partial', 1, 1, 1, 1, 1, 1),
+(202355856, 'Thanos', 'The Great', 'Tyrant', '1900-06-23', 'male', 'Balanceism', 'Titanian', 'Lady Death', 'thanos@infinity.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://twitter.com/inevitable', 0x363863626138616330316236622e6a7067, 'Sanctuary II, Outer Space', '+9999999999', 3000, 'Bachelor of Science in Criminology', '4th', 'Active', 'Regular', 4.00, 0.00, '2025-10-18', '2025-09-18 06:13:15', 'Full', 0, 0, 0, 1, 0, 0),
+(202355880, 'Xiao', 'KungFu', 'Xiao', '2001-09-09', 'male', 'Stick-Fu', 'Flashlandian', 'Master Stick', 'xiaoxiao@flashdojo.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://newgrounds.com/sticklegend', 0x363863626138663462653335322e706e67, 'Hidden Dojo, Pixel Valley', '09998887777', 888, 'Bachelor of Science in Industrial Technology', '3rd', 'Active', 'Regular', 3.50, 1234.56, '2025-10-18', '2025-09-18 06:19:41', 'Athletic', 0, 1, 0, 1, 0, 0),
+(202355881, 'Freak', 'Square', 'Bob', '1986-07-14', 'male', 'Jellyfish Worship', 'Bikini Bottomian', 'Grandma SquarePants', 'spongebob@pineapple.edu', '$2y$10$yLJP7MET115Ohq6XWkeJ.eMix5PwjwBRxgeOpXijIWA51jsdwn9Wq', 'https://instagram.com/imready', 0x363863626139656330383263362e6a7067, 'Pineapple House, 124 Conch St., Bikini Bottom', '09180000000', 99, 'Bachelor of Science in Hospitality Management', '2nd', 'Active', 'Regular', 3.25, 500.00, '2025-10-18', '2025-09-18 06:23:00', 'Full', 0, 0, 0, 1, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -87,7 +93,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202355879;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202355882;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

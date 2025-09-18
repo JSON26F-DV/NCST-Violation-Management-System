@@ -38,9 +38,16 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
             transition: all 0.2s ease;
         }
+    a {
+        text-decoration: none; 
+        color: inherit;        
+    }
+    a {
+        text-decoration: none !important;
+        color: #333333;
+    }
     </style>
-</head>
-<body>
+
     <div class="container py-4">
         <!-- Header -->
         <header class="mb-5">
@@ -49,13 +56,13 @@
             <!-- Filter Buttons -->
             <div class="d-flex flex-wrap gap-2 mb-4">
                 <button id="filter_pending" class="btn btn-outline-primary rounded-pill px-3 filter-btn active">
-                    <i class="bi bi-clock me-1"></i> Pending
+                    <i class='iconify' data-icon='fluent-color:mail-clock-24' data-width='30px'></i>  Pending 
                 </button>
                 <button id="filter_ongoing" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                    <i class="bi bi-hourglass-split me-1"></i> Ongoing Judgement
+                    <i class='iconify' data-icon='fluent-color:arrow-clockwise-dashes-settings-24' data-width='30px'></i>  Ongoing Judgement
                 </button>
                 <button id="filter_results" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                    <i class="bi bi-file-earmark-text me-1"></i> Results
+                    <i class='iconify' data-icon='fluent-color:text-bullet-list-square-sparkle-24' data-width='30px'></i>  Results
                 </button>
             </div>
         </header>
@@ -64,54 +71,22 @@
         <div class="row g-4">
             <!-- Case 1 -->
             <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 card-hover h-100">
+                <div class="card border-0 shadow-sm rounded-4 card-hover h-100">
                     <div class="card-body p-4">
-                        <div class="d-flex align-items-start mb-3">
-                            <span class="card-emoji">📌</span>
+                        <div class="d-flex align-items-start mb-3 gap-2">
+                            <span class='iconify' data-icon='fluent-color:pin-24' data-width='40px'></span>
                             <div>
                                 <h5 class="card-title mb-1">Violation: Cutting Classes</h5>
                                 <p class="text-muted small mb-2">Juan Dela Cruz • Sep 12, 2025</p>
                                 <span class="status-badge status-pending">Pending</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-link ps-0 mt-2">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        
+                        <a href="#" class="btn btn-link ps-0 mt-2 flex_centered">View Details <i class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- Case 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 card-hover h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-start mb-3">
-                            <span class="card-emoji">🚫</span>
-                            <div>
-                                <h5 class="card-title mb-1">Violation: Cheating during Exam</h5>
-                                <p class="text-muted small mb-2">Maria Santos • Sep 10, 2025</p>
-                                <span class="status-badge status-ongoing">Ongoing Judgement</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-link ps-0 mt-2">View Details <i class="bi bi-arrow-right-short"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Case 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 card-hover h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-start mb-3">
-                            <span class="card-emoji">✅</span>
-                            <div>
-                                <h5 class="card-title mb-1">Violation: Misbehavior in Class</h5>
-                                <p class="text-muted small mb-2">Pedro Ramirez • Sep 8, 2025</p>
-                                <span class="status-badge status-result">Result: Proven Not Guilty</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-link ps-0 mt-2">View Details <i class="bi bi-arrow-right-short"></i></a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

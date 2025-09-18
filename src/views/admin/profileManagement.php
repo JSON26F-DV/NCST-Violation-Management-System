@@ -190,7 +190,7 @@
             background: transparent;
             color: var(--text-secondary);
             border-radius: var(--border-radius);
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1rem;
             margin: 0 0.25rem;
             transition: all 0.3s ease;
             font-weight: 500;
@@ -320,7 +320,7 @@
             }
         }
 
-            .user_content .user_picture {
+    .user_content .user_picture {
         height: 170px;
         width: 170px;
         padding: 10px;
@@ -460,32 +460,32 @@
                                 }
                                 echo"
                                     <form method='post'>
-                                        <!-- Modern Tab Navigation -->
-                                        <ul class='nav nav-tabs nav-tabs-modern' id='profileTabs' role='tablist'>
-                                            <li class='nav-item' role='presentation'>
+                                        <ul class='nav nav-tabs nav-tabs-modern flex_centered' id='profileTabs' role='tablist'>
+                                            <li class='nav-item flex_centered' role='presentation'>
                                                 <button class='nav-link active' id='personal-tab' data-bs-toggle='tab' data-bs-target='#personal' type='button' role='tab'>
-                                                    <i class='bi bi-person-lines-fill me-2'></i>Personal
+                                                    <i class='iconify' data-icon='fluent-color:book-contacts-24' data-width='30px'></i>  Personal
                                                 </button>
                                             </li>
                                             <li class='nav-item' role='presentation'>
                                                 <button class='nav-link' id='academic-tab' data-bs-toggle='tab' data-bs-target='#academic' type='button' role='tab'>
-                                                    <i class='bi bi-mortarboard me-2'></i>Academic
+                                                    <i class='iconify' data-icon='fluent-color:book-star-24' data-width='30px'></i>Academic
                                                 </button>
                                             </li>
                                             <li class='nav-item' role='presentation'>
                                                 <button class='nav-link' id='documents-tab' data-bs-toggle='tab' data-bs-target='#documents' type='button' role='tab'>
-                                                    <i class='bi bi-file-earmark-text me-2'></i>Documents
+                                                    <i class='iconify' data-icon='fluent-color:document-folder-24' data-width='30px'></i>Documents
                                                 </button>
                                             </li>
                                             <li class='nav-item' role='presentation'>
                                                 <button class='nav-link' id='financial-tab' data-bs-toggle='tab' data-bs-target='#financial' type='button' role='tab'>
-                                                    <i class='bi bi-cash-stack me-2'></i>Financial
+                                                    <i class='iconify' data-icon='fluent-color:coin-multiple-24' data-width='30px'></i> Financial
                                                 </button>
                                             </li>
                                         </ul>
-                                        <!-- Tab Content -->
+
+
                                         <div class='tab-content' id='profileTabsContent'>
-                                            <!-- Personal Info Tab -->
+                                            <!-- PERSONAL INFORMATION -->
                                             <div class='tab-pane fade show active' id='personal' role='tabpanel'>
                                                 <div class='row g-3'>
                                                             <div class='col-md-6'>
@@ -527,7 +527,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Academic Tab -->
+                                            <!-- ACADEMIC INFORMATION -->
                                             <div class='tab-pane fade' id='academic' role='tabpanel'>
                                                 <div class='row g-3'>
                                                     <div class='col-md-6'>
@@ -581,7 +581,7 @@
                                                 </div>
                                             </div> 
 
-                                            <!-- Documents Tab -->
+                                            <!-- DOCUMENTS INFORMATION-->
                                             <div class='tab-pane fade' id='documents' role='tabpanel'>
                                                 <div class='row g-4'>
                                                     <div class='col-md-6'>
@@ -635,7 +635,6 @@
                                                 </div>
                                             </div>  
 
-                                            <!-- Financial Tab -->
                                             <div class='tab-pane fade' id='financial' role='tabpanel'>
                                                 <div class='row g-3'>
                                                     <div class='col-md-6'>
@@ -668,7 +667,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Footer -->
+                                            <!-- FOOTER --!>
                                                 <div class='modal-footer d-flex gap-2'>
                                                     <a href='accountAuditing.php' class='btn btn-outline-secondary'>
                                                         <i class='bi bi-x-circle me-2'></i>Cancel
