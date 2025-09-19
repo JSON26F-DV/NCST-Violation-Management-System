@@ -34,5 +34,5 @@ It provides a web-based platform for recording, updating, and resolving violatio
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/student-violation-management.git
+   git clone https://github.com/JSON26F-DV/NCST-Violation-Management-System
    ```

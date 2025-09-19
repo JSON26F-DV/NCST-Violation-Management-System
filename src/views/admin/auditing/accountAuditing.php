@@ -52,7 +52,6 @@
 
 <div class="container mb-5">
     <h1 class="text-center mb-5">Student Account Auditing</h1>
-    
     <!-- SEARCH BAR TRALALA -->
     <div class="search-container">
         <div class="row">
@@ -112,7 +111,7 @@
                                 </div>
                                 <div class='d-flex gap-1 d-md-flex justify-content-md-center'>
                                     <a href='/ncst/src/views/admin/profile/profileManagement.php?id={$row->student_id}' class='btn btn-outline-success btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-edit-24' data-width='30px' ></i> Update</a href='profileManagement.php'>
-                                    <button class='btn btn-outline-primary btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-folder-24' data-width='30px' ></i> Manage</button>
+                                    <a href='/ncst/src/views/admin/actions/student_management.php?id={$row->student_id}' class='btn btn-outline-primary btn-sm rounded-3'><i class='iconify' data-icon='fluent-color:document-folder-24' data-width='30px' ></i> Manage</a href='profileManagement.php'>
                                 </div>
                             </div>
                         </div>

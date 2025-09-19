@@ -1,356 +1,357 @@
 <?php
      include_once __DIR__ . '/../layouts/header_admin.php';
+     include_once __DIR__ . "/../../../components/actions/student_status.php";
 
     $sql = "SELECT * FROM students WHERE student_id = ".$_GET['id'];
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     extract($row);
 ?>
-    <style>
-        :root {
-            --primary-blue: #1877f2;
-            --primary-blue-hover: #166fe5;
-            --surface-bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-primary: #1c1e21;
-            --text-secondary: #65676b;
-            --border-color: #dadde1;
-            --shadow-light: 0 2px 12px rgba(0, 0, 0, 0.08);
-            --shadow-medium: 0 4px 24px rgba(0, 0, 0, 0.12);
-            --border-radius: 12px;
-            --border-radius-lg: 16px;
-        }
+<style>
+    :root {
+        --primary-blue: #1877f2;
+        --primary-blue-hover: #166fe5;
+        --surface-bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text-primary: #1c1e21;
+        --text-secondary: #65676b;
+        --border-color: #dadde1;
+        --shadow-light: 0 2px 12px rgba(0, 0, 0, 0.08);
+        --shadow-medium: 0 4px 24px rgba(0, 0, 0, 0.12);
+        --border-radius: 12px;
+        --border-radius-lg: 16px;
+    }
 
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-primary);
-            min-height: 100vh;
-        }
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-primary);
+        min-height: 100vh;
+    }
 
-        .profile-container {
-            background: var(--card-bg);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-medium);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
+    .profile-container {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-medium);
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
 
-        .profile-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #4267b2 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: rotate(0deg); opacity: 0.3; }
-            50% { transform: rotate(180deg); opacity: 0.1; }
-        }
-
-        .profile-picture-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1rem;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #ffffff, #e6e6e6);
-            box-shadow: 
-                8px 8px 16px rgba(0, 0, 0, 0.1),
-                -8px -8px 16px rgba(255, 255, 255, 0.8);
-            padding: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .profile-picture-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                12px 12px 24px rgba(0, 0, 0, 0.15),
-                -12px -12px 24px rgba(255, 255, 255, 0.9);
-        }
-
-        .profile-picture {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background: linear-gradient(45deg, #f0f2f5, #ddd);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: var(--text-secondary);
-        }
-
-        .camera-icon {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 36px;
-            height: 36px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-light);
-        }
-
-        .camera-icon:hover {
-            background: var(--primary-blue-hover);
-            transform: scale(1.1);
-        }
-
-        .user-info-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: var(--shadow-light);
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            margin-bottom: 0.75rem;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: var(--primary-blue);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .info-item:hover {
-            transform: translateX(4px);
-            box-shadow: var(--shadow-light);
-        }
-
-        .info-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .info-icon {
-            width: 40px !important;
-            height: 40px;
-            border-radius: var(--border-radius);
-            background: linear-gradient(145deg, var(--primary-blue), #4267b2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-right: 1rem;
-            font-size: 1.1rem;
-            box-shadow: 
-                4px 4px 8px rgba(24, 119, 242, 0.2),
-                -2px -2px 8px rgba(255, 255, 255, 0.8);
-        }
-
-        .nav-tabs-modern {
-            border: none;
-            background: var(--surface-bg);
-            border-radius: var(--border-radius);
-            padding: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .nav-tabs-modern .nav-link {
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            border-radius: var(--border-radius);
-            padding: 0.75rem 1rem;
-            margin: 0 0.25rem;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-tabs-modern .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-tabs-modern .nav-link:hover::before {
-            left: 100%;
-        }
-
-        .nav-tabs-modern .nav-link:hover {
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-light);
-        }
-
-        .nav-tabs-modern .nav-link.active {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 
-                0 4px 12px rgba(24, 119, 242, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .tab-content {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-        }
-
-        .form-control, .form-select {
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-            background: var(--card-bg);
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
-            background: var(--card-bg);
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-blue);
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-blue-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
-        }
-
-        .btn-outline-secondary {
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            border-radius: var(--border-radius);
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-secondary:hover {
-            background: var(--surface-bg);
-            border-color: var(--text-secondary);
-            color: var(--text-primary);
-        }
-
-        .modal-footer {
-            padding: 1.5rem 2rem;
-        }
-
-        /* Form Switch Styling */
-        .form-check-input:checked {
-            background-color: var(--primary-blue);
-            border-color: var(--primary-blue);
-        }
-
-        .form-check-input:focus {
-            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .profile-container {
-                margin: 1rem;
-                border-radius: var(--border-radius);
-            }
-            
-            .profile-header {
-                padding: 1.5rem;
-            }
-            
-            .nav-tabs-modern {
-                flex-direction: column;
-            }
-            
-            .nav-tabs-modern .nav-link {
-                margin: 0.25rem 0;
-            }
-        }
-
-    .user_content .user_picture {
-        height: 170px;
-        width: 170px;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .profile-header {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, #4267b2 100%);
+        color: white;
+        padding: 2rem;
         text-align: center;
-        border-radius: 50%;
-        border: 5px solid #b2b2b2ff;
-        padding-top: 20px;
         position: relative;
+        overflow: hidden;
     }
-    .camera {
-        padding: 8px;
-        border: 3px solid white;
-        background-color: #b2b2b2ff;
-        border-radius: 50%;
+
+    .profile-header::before {
+        content: '';
         position: absolute;
-        bottom: 0;
-        right: 55px;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: shimmer 3s ease-in-out infinite;
     }
-    </style>
+
+    @keyframes shimmer {
+        0%, 100% { transform: rotate(0deg); opacity: 0.3; }
+        50% { transform: rotate(180deg); opacity: 0.1; }
+    }
+
+    .profile-picture-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #ffffff, #e6e6e6);
+        box-shadow: 
+            8px 8px 16px rgba(0, 0, 0, 0.1),
+            -8px -8px 16px rgba(255, 255, 255, 0.8);
+        padding: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .profile-picture-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+            12px 12px 24px rgba(0, 0, 0, 0.15),
+            -12px -12px 24px rgba(255, 255, 255, 0.9);
+    }
+
+    .profile-picture {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: linear-gradient(45deg, #f0f2f5, #ddd);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: var(--text-secondary);
+    }
+
+    .camera-icon {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+        background: var(--primary-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-light);
+    }
+
+    .camera-icon:hover {
+        background: var(--primary-blue-hover);
+        transform: scale(1.1);
+    }
+
+    .user-info-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: var(--shadow-light);
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        margin-bottom: 0.75rem;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: var(--primary-blue);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .info-item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-light);
+    }
+
+    .info-item:hover::before {
+        transform: scaleY(1);
+    }
+
+    .info-icon {
+        width: 40px !important;
+        height: 40px;
+        border-radius: var(--border-radius);
+        background: linear-gradient(145deg, var(--primary-blue), #4267b2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 1rem;
+        font-size: 1.1rem;
+        box-shadow: 
+            4px 4px 8px rgba(24, 119, 242, 0.2),
+            -2px -2px 8px rgba(255, 255, 255, 0.8);
+    }
+
+    .nav-tabs-modern {
+        border: none;
+        background: var(--surface-bg);
+        border-radius: var(--border-radius);
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .nav-tabs-modern .nav-link {
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        border-radius: var(--border-radius);
+        padding: 0.75rem 1rem;
+        margin: 0 0.25rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-tabs-modern .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+    }
+
+    .nav-tabs-modern .nav-link:hover::before {
+        left: 100%;
+    }
+
+    .nav-tabs-modern .nav-link:hover {
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-light);
+    }
+
+    .nav-tabs-modern .nav-link.active {
+        background: var(--primary-blue);
+        color: white;
+        box-shadow: 
+            0 4px 12px rgba(24, 119, 242, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .tab-content {
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .form-control, .form-select {
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+        background: var(--card-bg);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+        background: var(--card-bg);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-primary {
+        background: var(--primary-blue);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-blue-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
+    }
+
+    .btn-outline-secondary {
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        border-radius: var(--border-radius);
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-secondary:hover {
+        background: var(--surface-bg);
+        border-color: var(--text-secondary);
+        color: var(--text-primary);
+    }
+
+    .modal-footer {
+        padding: 1.5rem 2rem;
+    }
+
+    /* Form Switch Styling */
+    .form-check-input:checked {
+        background-color: var(--primary-blue);
+        border-color: var(--primary-blue);
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .profile-container {
+            margin: 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .profile-header {
+            padding: 1.5rem;
+        }
+        
+        .nav-tabs-modern {
+            flex-direction: column;
+        }
+        
+        .nav-tabs-modern .nav-link {
+            margin: 0.25rem 0;
+        }
+    }
+
+.user_content .user_picture {
+    height: 170px;
+    width: 170px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    border: 5px solid #b2b2b2ff;
+    padding-top: 20px;
+    position: relative;
+}
+.camera {
+    padding: 8px;
+    border: 3px solid white;
+    background-color: #b2b2b2ff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 55px;
+}
+</style>
 
     <div class='container-fluid py-4'>
         <div class='row justify-content-center'>
             <div class='col-12 col-xl-10'>
                 <div class='profile-container'>
                     <div class='profile-header'>
-                        <h2 class='mb-0 position-relative text-light'>Update Profile Information</h2>
-                        <p class='mb-0 mt-2 opacity-75 position-relative text-light'>Keep your information current and secure</p>
+                        <h2 class='mb-0 position-relative text-light'>Student Record Management</h2>
+                        <p class='mb-0 mt-2 opacity-75 position-relative text-light'>View and manage student information, account settings, violation records, and credits.</p>
                     </div>
 
                     <div class='row g-0'>
@@ -396,79 +397,17 @@
 
                         <div class='col-lg-8 p-4'>
                             <?php
-                                if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                                    //PERSONAL Information
-                                    $student_id = intval($_GET['id']);
-                                    $first_name = $_POST['first_name'];
-                                    $middle_name = $_POST['middle_name'];
-                                    $last_name = $_POST['last_name'];
-                                    $birthday = $_POST['birthday'];
-                                    $sex = $_POST['sex'];
-                                    $religion = $_POST['religion'];
-                                    $nationality = $_POST['nationality'];
-                                    $guardian = $_POST['guardian'];
-
-                                    //ACADEMIC INFORMATION
-                                    $student_credits = $_POST['student_credits'];
-                                    $course = $_POST['course'];
-                                    $year_level = $_POST['year_level'];
-                                    $student_status = $_POST['student_status'];
-                                    $academic_standing = $_POST['academic_standing'];
-                                    $current_gpa = $_POST['current_gpa'];
-
-                                    //DOCUMENTS & REQUIREMENT
-                                    $hasBirthCertificate = isset($_POST['hasBirthCertificate']) ? 1 : 0;
-                                    $hasGoodMoral = isset($_POST['hasGoodMoral']) ? 1 : 0;
-                                    $hasReportCard = isset($_POST['hasReportCard']) ? 1 : 0;
-                                    $hasIDPicture = isset($_POST['hasIDPicture']) ? 1 : 0;
-                                    $hasMedical_record = isset($_POST['hasMedical_record']) ? 1 : 0;
-                                    $hasForm137 = isset($_POST['hasForm137']) ? 1 : 0;
-
-                                    //FINANCIAL INFORMATION
-                                    $scholarship = $_POST['scholarship'];
-                                    $tuition_balance = $_POST['tuition_balance'];
-                                    $next_payment_due = $_POST['next_payment_due'];
-                                    $last_payment = $_POST['last_payment'];
-
-                                    $stmt = $conn->prepare("UPDATE students SET
-                                        first_name=?, middle_name=?, last_name=?, birthday=?, sex=?, religion=?, nationality=?, guardian=?, 
-                                        student_credits=?, course=?, year_level=?, student_status=?, academic_standing=?, current_gpa=?, 
-                                        hasBirthCertificate=?, hasGoodMoral=?, hasReportCard=? ,hasIDPicture=?, hasMedical_record=?, hasForm137=? , scholarship=?,
-                                        tuition_balance=?, next_payment_due=?, last_payment=?
-                                        WHERE student_id=?
-                                    ");
-
-                                    if (!$stmt) {
-                                        echo "<script>alert('Prepare failed: " . $conn->error . "');</script>";
-                                    }
-
-                                    $stmt->bind_param(
-                                        "ssssssssissssdiiiiiisissi", 
-                                        $first_name, $middle_name, $last_name, $birthday, $sex, $religion, $nationality,
-                                        $guardian, $student_credits, $course, $year_level, $student_status, $academic_standing, $current_gpa, $hasBirthCertificate, $hasGoodMoral, $hasReportCard, $hasIDPicture, $hasMedical_record, $hasForm137, $scholarship, $tuition_balance, $next_payment_due, $last_payment, $student_id
-                                    );
-
-                                    if (!$stmt->execute()) {
-                                        echo "Execute failed: " . $stmt->error;
-                                    } else {
-                                        echo "<script>
-                                            alert('Update success');
-                                            window.location.href='../auditing/accountAuditing.php';
-                                        </script>";
-                                    }
-                                $stmt->close();
-                                }
+                                $state = getStudentStatus($student_credits);
                                 echo"
-                                    <form method='post'>
                                         <ul class='nav nav-tabs nav-tabs-modern flex_centered' id='profileTabs' role='tablist'>
                                             <li class='nav-item flex_centered' role='presentation'>
                                                 <button class='nav-link active' id='personal-tab' data-bs-toggle='tab' data-bs-target='#personal' type='button' role='tab'>
-                                                    <i class='iconify' data-icon='fluent-color:book-contacts-24' data-width='30px'></i>  Personal
+                                                    <i class='iconify' data-icon='fluent-color:contact-card-24' data-width='30px'></i>  Status
                                                 </button>
                                             </li>
                                             <li class='nav-item' role='presentation'>
                                                 <button class='nav-link' id='academic-tab' data-bs-toggle='tab' data-bs-target='#academic' type='button' role='tab'>
-                                                    <i class='iconify' data-icon='fluent-color:book-star-24' data-width='30px'></i>Academic
+                                                    <i class='iconify' data-icon='fluent-color:content-view-24' data-width='30px'></i> Records
                                                 </button>
                                             </li>
                                             <li class='nav-item' role='presentation'>
@@ -487,43 +426,37 @@
                                         <div class='tab-content' id='profileTabsContent'>
                                             <!-- PERSONAL INFORMATION -->
                                             <div class='tab-pane fade show active' id='personal' role='tabpanel'>
-                                                <div class='row g-3'>
-                                                            <div class='col-md-6'>
-                                                                <label for='firstName' class='form-label'>First Name</label>
-                                                                <input type='text' class='form-control' id='first_name' name='first_name' value='$first_name'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='middleName' class='form-label'>Middle Name</label>
-                                                                <input type='text' class='form-control' id='middle_name' name='middle_name' value='$middle_name'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='lastName' class='form-label'>Last Name</label>
-                                                                <input type='text' class='form-control' id='last_name' name='last_name' value='$last_name'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='birthday' class='form-label'>Birthday</label>
-                                                                <input type='date' class='form-control' id='birthday' name='birthday' value='$birthday'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='sex' class='form-label'>Sex</label>
-                                                                    <select class='form-select' name='sex'>
-                                                                        <option value='male'" . ($sex=='male' ? " selected" : "") . ">Male</option>
-                                                                        <option value='female'" . ($sex=='female' ? " selected" : "") . ">Female</option>
-                                                                        <option value='other'" . ($sex=='other' ? " selected" : "") . ">Other</option>
-                                                                    </select>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='religion' class='form-label'>Religion</label>
-                                                                <input type='text' class='form-control' id='religion' name='religion' value='$religion'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='nationality' class='form-label'>Nationality</label>
-                                                                <input type='text' class='form-control' id='nationality' name='nationality' value='$nationality'>
-                                                            </div>
-                                                            <div class='col-md-6'>
-                                                                <label for='guardian' class='form-label'>Guardian</label>
-                                                                <input type='text' class='form-control' id='guardian' name='guardian' value='$guardian'>
-                                                            </div>
+                                                <div class='container flex_centered flex-column mb-3'>
+                                                        <div class='circle' style='background: conic-gradient({$state['status']}  0% $student_credits%, #e9ecef $student_credits% 100%);''>
+                                                            <span class='bg-light text-{$state['status']}  percentage flex_centered fs-1' >$student_credits</span>
+                                                        </div>
+
+                                                    <div class='content d-flex flex-column mt-3'>
+                                                            <h4 class='text-center text-{$state['status']}'>{$state['violation_status']}</h4>
+                                                            <p><strong>Description</strong>: {$state['description']}</p>
+                                                            <p><strong>Access</strong>: {$state['access']}</p>
+                                                    </div>
+                                                </div>
+                                                <div class='row g-3 px-3'>
+                                                    <div class='col-12'>
+                                                        <div class='d-flex justify-content-between align-items-center'>
+                                                            <span class='text-secondary fw-semibold text-black'>Clearance</span>
+                                                            <span class='badge bg-{$state['pendingStatus']} status-badge'>{$state['clearance']}</span>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-12'>
+                                                        <div class='d-flex justify-content-between align-items-center'>
+                                                            <span class='text-secondary fw-semibold text-black'>Certificate Requests</span>
+                                                            <span class='badge bg-{$state['requests_status']} status-badge'>{$state['requests_certificate']}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-12'>
+                                                        <div class='d-flex justify-content-between align-items-center'>
+                                                            <span class='text-secondary fw-semibold text-black'>Next Term Enrollment</span>
+                                                            <span class='badge bg-{$state['isallowed']} status-badge'>{$state['Enrollment']}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -667,16 +600,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- FOOTER --!>
-                                                <div class='modal-footer d-flex gap-2'>
-                                                    <a href='../auditing/accountAuditing.php' class='btn btn-outline-secondary'>
-                                                        <i class='bi bi-x-circle me-2'></i>Cancel
-                                                    </a>
-                                                    <button type='submit' class='btn btn-primary'>
-                                                        <i class='bi bi-check-circle me-2'></i>Save Changes
-                                                    </button>
-                                                </div>
-                                            </form>
                                         ";
                                     ?>
                                 </div>

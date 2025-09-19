@@ -68,22 +68,29 @@
 
         <!-- Cases Cards -->
         <div class="row g-4">
-            <!-- Case 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-4 card-hover h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-start mb-3 gap-2">
-                            <span class='iconify' data-icon='fluent-color:pin-24' data-width='40px'></span>
-                            <div>
-                                <h5 class="card-title mb-1">Violation: Cutting Classes</h5>
-                                <p class="text-muted small mb-2">Juan Dela Cruz • Sep 12, 2025</p>
-                                <span class="status-badge status-pending">Pending</span>
+            <?php
+                $sql = 'SELECT * FROM violations';
+                $query = $conn->query( $sql);
+                while ($row = $query->fetch_object()) {
+                    echo "
+                        <div class='col-md-6 col-lg-4'>
+                            <div class='card border-0 shadow-sm rounded-4 card-hover h-100'>
+                                <div class='card-body p-4'>
+                                    <div class='d-flex align-items-start mb-3 gap-2'>
+                                        <span class='iconify' data-icon='fluent-color:pin-24' data-width='40px'></span>
+                                        <div>
+                                            <h5 class='card-title mb-1'>{$row->offense}</h5>
+                                            <p class='text-muted small mb-2'>{$row->complainant_email} • {$row->date_reported}</p>
+                                            <span class='status-badge status-pending'>{$row->status}</span>
+                                        </div>
+                                    </div>
+                                    <a href='#' class='btn btn-link ps-0 mt-2'>View Details <i class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></i></a>
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-link ps-0 mt-2 flex_centered">View Details <i class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></i></a>
-                    </div>
-                </div>
-            </div>
+                    ";
+                }
+            ?>
 
             
 

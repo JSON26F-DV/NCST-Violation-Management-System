@@ -54,49 +54,60 @@
     </style>
 
 <div class="container py-4">
+    <?php
+    $filter = 'all';  
+    if (isset($_GET["Unread"])) {
+        $filter = 'unread';
+    } elseif (isset($_GET["Read"])) {
+        $filter = 'read';
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $sql = "SELECT m.*, s.profile_pic 
+                FROM Mail_log m 
+                JOIN students s ON m.from_id = s.student_id 
+                ORDER BY created_at DESC";
+        if (isset($_GET["Unread"])) {
+            $sql = "SELECT m.*, s.profile_pic 
+                    FROM Mail_log m 
+                    JOIN students s ON m.from_id = s.student_id 
+                    WHERE m.status = 'pending' 
+                    ORDER BY created_at DESC";
+        } elseif (isset($_GET["Read"])) {
+            $sql = "SELECT m.*, s.profile_pic 
+                    FROM Mail_log m 
+                    JOIN students s ON m.from_id = s.student_id 
+                    WHERE m.status != 'pending' 
+                    ORDER BY created_at DESC";
+        }
+
+        $query = $conn->query($sql);
+        if (!$query) {
+            die("Query failed: " . $conn->error);
+        }
+    }
+
+    ?>
     <header class="mb-5">
         <h1 class="display-5 fw-bold mb-4">Student Messages</h1>
         <form method="get">
             <div class="d-flex flex-wrap gap-2 mb-4">
-                <button type="submit" id="filter_pending" class="btn btn-outline-primary rounded-pill px-3 filter-btn active">
-                    <i class='iconify' data-icon='fluent-color:apps-list-detail-24' data-width='30px'></i>  All 
+                <!-- All button, active state based on PHP logic -->
+                <button type="submit" name="All" class="btn btn-outline-primary rounded-pill px-3 filter-btn <?php echo ($filter === 'all') ? 'active' : ''; ?>">
+                    <i class="iconify" data-icon="fluent-color:apps-list-detail-24" data-width="30px"></i> All
                 </button>
-                <button type="submit" name="Unread" id="Unread" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                    <i class='iconify' data-icon='fluent-color:mail-clock-24' data-width='30px'></i>  Unread
+                <!-- Unread button, active state based on PHP logic -->
+                <button type="submit" name="Unread" class="btn btn-outline-primary rounded-pill px-3 filter-btn <?php echo ($filter === 'unread') ? 'active' : ''; ?>">
+                    <i class="iconify" data-icon="fluent-color:mail-clock-24" data-width="30px"></i> Unread
                 </button>
-                <button type="submit" name="Read" id="Read" class="btn btn-outline-primary rounded-pill px-3 filter-btn">
-                    <i class='iconify' data-icon='fluent-color:text-bullet-list-square-sparkle-24' data-width='30px'></i>  Read
+                <!-- Read button, active state based on PHP logic -->
+                <button type="submit" name="Read" class="btn btn-outline-primary rounded-pill px-3 filter-btn <?php echo ($filter === 'read') ? 'active' : ''; ?>">
+                    <i class="iconify" data-icon="fluent-color:text-bullet-list-square-sparkle-24" data-width="30px"></i> Read
                 </button>
             </div>
         </form>
     </header>
     <div class='row g-4'>
         <?php
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $sql = "SELECT m.*, s.profile_pic 
-                        FROM Mail_log m 
-                        JOIN students s ON m.from_id = s.student_id 
-                        ORDER BY created_at DESC";
-
-                if (isset($_GET["Unread"])) {
-                    $sql = "SELECT m.*, s.profile_pic 
-                            FROM Mail_log m 
-                            JOIN students s ON m.from_id = s.student_id 
-                            WHERE m.status = 'pending' 
-                            ORDER BY created_at DESC";
-                } elseif (isset($_GET["Read"])) {
-                    $sql = "SELECT m.*, s.profile_pic 
-                            FROM Mail_log m 
-                            JOIN students s ON m.from_id = s.student_id 
-                            WHERE m.status != 'pending' 
-                            ORDER BY created_at DESC";
-                }
-
-                $query = $conn->query($sql);
-                if (!$query) {
-                    die("Query failed: " . $conn->error);
-                }
-            }
                 while($row = $query->fetch_object()) {
                 $statusText = ($row->admin_read == 0) ? 'UNREAD' : 'READ';
                 
@@ -121,19 +132,26 @@
             echo "
                 <div class='col-md-6 col-lg-4'>
                     <a href='/ncst/src/views/mails/shared/student_mail.php?id={$row->id}'>
-                        <div class='d-flex border rounded-3 p-3 mb-2 bg-light position-relative'>
-                            <div class='flex-shrink-0'>
-                                <img src='/ncst/public/uploads/profile/{$row->profile_pic}' width='59px' class='rounded-circle' alt='Profile'>
-                            </div>
-                            <div class='flex-grow-1 mx-2'>
-                                <div class='fw-bold  w-75 overflow-hidden'>{$row->subject}</div>
-                                <div class='text-muted small overflow-hidden'>{$row->body}</div>
-                                <div class='text-muted small'>{$row->email}</div>
-                            </div>
-                            <p class='status-badge status-pending position-absolute fw-bold'>$statusText </p>
-                            <div class='text-end  small text-muted position-absolute time'>
-                                <div>$timeAgo</div>
-                            </div>
+                        <div class=' border rounded bg-white'>
+                            <div >
+                                <div class='d-flex  p-3 position-relative'>
+                                    <div class='flex-shrink-0'>
+                                        <img src='/ncst/public/uploads/profile/{$row->profile_pic}' width='59px' class='rounded-circle' alt='Profile'>
+                                    </div>
+                                    <div class='flex-grow-1 mx-2'>
+                                        <div class='fw-bold  w-75 overflow-hidden'>{$row->subject}</div>
+                                        <div class='text-muted small overflow-hidden'></div>
+                                        <div class='text-muted small'>{$row->email}</div>
+                                    </div>
+                                    <p class='status-badge status-pending position-absolute fw-bold'>$statusText </p>
+                                    <div class='text-end  small text-muted position-absolute time'>
+                                        <div>$timeAgo</div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class='mb-3 p-3'>
+                                <textarea class='form-control'  rows='2' disabled>{$row->body}</textarea>
+                            </div>  
                         </div>
                     </a>
                 </div>
@@ -147,11 +165,14 @@
 <script>
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
+            // Remove the 'active' class from all filter buttons
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            // Add the 'active' class to the clicked button
             this.classList.add('active');
         });
     });
 </script>
+
 
 <?php
     include_once __DIR__ . '/../layouts/footer_admin.php';

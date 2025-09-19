@@ -24,7 +24,7 @@
                 echo "<script>alert('Wrong Email or Password');window.location.href = 'loginPage.php';</script>";
             }
         } else {
-            // Check in OSA_staff table
+            // Check  OSA_staff ACCOUNT
             $sql2 = "SELECT * FROM OSA_staff WHERE email=?";
             $stmt2 = $conn->prepare($sql2);
             $stmt2->bind_param("s", $email);

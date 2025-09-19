@@ -21,4 +21,12 @@
         header("Location: /ncst/src/views/authenticated/students/userProfile.php");
         exit();
     }
+    if (isset($_SESSION["staff_id"]) && !empty($_SESSION["staff_id"])) {
+        echo "
+        <script>
+            window.location.href = '/ncst/src/views/admin/auditing/accountAuditing.php';
+        </script>";
+        exit;
+    }
+
 ?>

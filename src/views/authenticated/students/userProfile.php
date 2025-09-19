@@ -1,7 +1,5 @@
 <?php
     include_once('../../../../header.php');
-    require('student_status.php');
-    include('../../../components/navigationBar.php');
 ?>
 
 <style>
@@ -73,56 +71,6 @@
         transform: scale(1);
         opacity: 1;
     }
-
-    .bg-green {
-        background-color: green;
-    }
-    .bg-yellow {
-        background-color: yellow;
-    }
-    .bg-red {
-        background-color: red;
-    }
-
-    .text-green {
-        color: green !important;
-    }
-    .text-yellow {
-        color: yellow !important;
-    }
-    .text-red {
-        color: red !important;
-    }
-
-    .percentage {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        padding: 55px;
-    }
-.circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 20px;
-  color: #333;
-}
-a {
-    text-decoration: none; 
-    color: inherit;        
-}
-a {
-    text-decoration: none;
-    color: #333333;
-}
-.top-offset {
-    margin-top: 50px;
-}
-
     
 </style>
 

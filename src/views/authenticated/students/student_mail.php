@@ -50,7 +50,7 @@
             if (isset($state)) {
               switch($state) {
                   case 'accepted':
-                      $message='Request accepted by Student Affairs. See more ›';
+                      $message='Request accepted by Student Affairs. See more ';
                       $alertClass = "alert-success";
                       break;
                   case 'declined':
@@ -58,7 +58,7 @@
                       $alertClass = "alert-danger";
                       break;
                   default:
-                      $message='Your request is pending review by Student Affairs. View details ›';
+                      $message='Your request is pending review by Student Affairs. View details ';
                       $alertClass = "alert-secondary";
                       break;
               } 

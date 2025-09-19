@@ -1,3 +1,42 @@
+<style>
+        .bg-green {
+        background-color: green;
+        }
+        .bg-yellow {
+            background-color: yellow;
+        }
+        .bg-red {
+            background-color: red;
+        }
+
+        .text-green {
+            color: green !important;
+        }
+        .text-yellow {
+            color: yellow !important;
+        }
+        .text-red {
+            color: red !important;
+        }
+
+        .percentage {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 55px;
+        }
+    .circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    }
+</style>
 <?php
 function getStudentStatus($student_credits) {
     $status = [

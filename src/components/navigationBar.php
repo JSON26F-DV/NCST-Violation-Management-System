@@ -1,6 +1,5 @@
-
+<!-- 
 <style>
-        /* Facebook-style navbar */
         .facebook-navbar {
             background: #ffffff;
             border-bottom: 1px solid #e4e6ea;
@@ -16,8 +15,6 @@
         .facebook-navbar .navbar-brand:hover img {
             transform: scale(1.05);
         }
-
-        /* Navigation items styling */
         .nav-item {
             margin: 0 4px;
         }
@@ -47,7 +44,6 @@
             color: #1877f2;
         }
 
-        /* Notification badge */
         .notification-badge {
             position: absolute;
             top: -2px;
@@ -65,7 +61,6 @@
             border: 2px solid white;
         }
 
-        /* Profile dropdown */
         .profile-dropdown {
             position: relative;
         }
@@ -151,7 +146,6 @@
             margin: 8px 0;
         }
 
-        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .navbar-nav {
                 flex-direction: row;
@@ -195,13 +189,11 @@
             width: 400px;
             height: 500px;
         }
-    </style>
+</style>
 </head>
 <body>
-    <!-- Facebook-style Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top facebook-navbar bg-primary">
         <div class="container">
-            <!-- Logo -->
             <a class="navbar-brand" href="#">
                 <img src="/ncst/public/assets/ncstLogo.png"  alt="NCST Logo" height="35">
             </a>
@@ -210,52 +202,30 @@
                 <span class="badge office">OFFICE</span>
             </div>
             
-
-            <!-- Mobile toggle button -->
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" 
                     data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- Navigation items -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Student Records -->
                     <li class="nav-item">
                         <a class="nav-link" href="/ncst/src/views/authenticated/students/studentRecord.php" title="Student Records">
                             <span class='iconify' data-icon='fluent-color:news-24' data-width='35px'></span>
                         </a>
                     </li>
 
-                    <!-- Reports/Help -->
                     <li class="nav-item">
                         <button  type="button"   class="nav-link" data-bs-toggle="modal" data-bs-target="#reportForm">
                             <span class='iconify' data-icon='fluent-color:chat-bubbles-question-24' data-width='30px'></span>
                         </button>
                     </li>
 
-                    <!-- Notifications -->
                     <li class="nav-item">
                         <button  type="button"   class="nav-link" data-bs-toggle="modal" id="notifBtn">
-                        <?php
-                        $sql = "SELECT COUNT(*) AS unread 
-                                FROM Mail_log 
-                                WHERE status != 'pending'
-                                AND student_read = 0";
-                        $result = $conn->query($sql);
-                        $row = $result->fetch_assoc();
-                        $unread = $row['unread'];
-                            echo"
-                                <span class='iconify' data-icon='fluent-color:alert-28' data-width='25px'></span>
-                            ";  
-                            if ($unread > 0) {
-                                echo "<span class='notification-badge'>$unread</span>";
-                            }
-                        ?>
                         </button>
                     </li>
 
-                    <!-- Profile Dropdown -->
                     <li class="nav-item">
                         <details class="profile-dropdown">
                             <summary title="Account">
@@ -291,7 +261,4 @@
             </div>
         </div>
     </nav>
-
-    <?php
-        include("reportForm.php");
-    ?>
+ -->

@@ -91,9 +91,8 @@
                 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-                    if(isset($_POST['decline'])){
-                        $status = 'declined';
-                    } elseif(isset($_POST['accepted'])){
+                    if(isset($_POST['accepted'])){
+                        
                         $status = 'accepted';
                         $violation = "INSERT INTO violations (complainant_id, complainant_email, offense, description, attachment_id, date_reported) 
                         VALUES ('$from_id', '$email', '$subject', '$body', '$id', '$created_at')";
@@ -103,12 +102,14 @@
                         } else {
                             echo "<script>alert('Insert failed: " . $conn->error . "');</script>";
                         }
+                    } elseif(isset($_POST['declined'])){
+                        $status = 'declined';
                     }
 
                     if(isset($status)){
                         $sql = "UPDATE Mail_log SET status='$status', admin_read=1 WHERE id=".$_GET['id'];
                         if($conn->query($sql) == TRUE){
-                                header('Location: ../../views/admin/admin_Notification.php');
+                                header('Location: /ncst/src/views/admin/notifications/admin_Notification.php');
                             exit;
                         } else {
                             echo "Failed to update status";

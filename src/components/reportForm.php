@@ -111,7 +111,7 @@
         echo"
                 <form method='POST' autocomplete='off' enctype='multipart/form-data'>
                     <div class='modal-body'>
-                    <div class='card p-4 mb-4'>
+                    <div class=' p-4 mb-4'>
                         <h2 class='mb-4 text-center'>Student Report Form</h2>
                             <div class='mb-3'>
                                 <label for='fromEmail' class='form-label fw-bold'>From</label>
@@ -147,6 +147,7 @@
                 </form>
             ";
         ?>
+
     </div>
   </div>
 </div>

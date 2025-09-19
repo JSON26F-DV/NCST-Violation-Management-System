@@ -1,6 +1,5 @@
 <?php
-    include('../../../header.php');
-    include('../../components/navigationBar.php');
+    include_once __DIR__ . '/../../../../header.php';
 ?>
 <style>
         body {
@@ -66,11 +65,11 @@
 </style>
 
 
-<div class="container">
+<div class="container mt-5 pt-1">
     <div class="mail-container">
         <div class="mail-header">
             <h4 class="mb-0 text-light">
-                <span class="icon-3d">📨</span> Student Violation Report
+                <span class='iconify' data-icon='fluent-color:mail-multiple-24' data-width='40px'></span>  Student Violation Report
             </h4>
         </div>  
         <?php
@@ -135,6 +134,6 @@
     </div>
 </div>
 <?php
-    include("../../views/authenticated/students/student_mail.php");
-    include('../../../footer.php');
+    include __DIR__ . "/../../authenticated/students/student_mail.php";
+    include_once __DIR__ . '/../../../../footer.php';
 ?>

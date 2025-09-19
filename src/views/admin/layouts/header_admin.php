@@ -47,10 +47,19 @@
     </style>
 </head>
 <body>
-
+<?php
+    if (!isset($_SESSION["staff_id"]) || empty($_SESSION["staff_id"])) {
+        echo "
+            <script>
+                alert('Please login first to continue.');
+                window.location.href = '/ncst/src/views/guest/login/loginPage.php';
+            </script>";
+        exit;
+    }
+?>
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-primary flex_centered gap-2" href="#">
+            <a class="navbar-brand fw-bold text-primary flex_centered gap-2" href="/ncst/src/views/admin/auditing/accountAuditing.php">
                 <i class='iconify' data-icon='fluent-color:globe-shield-24' data-width='30px'></i>NCST Admin
             </a>
             

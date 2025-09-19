@@ -1,6 +1,5 @@
 <?php
-    include('../../../header.php');
-    include('../../components/navigationBar.php');
+    include_once __DIR__ . '/../../../../header.php';
 ?>
     <style>
         body {
@@ -101,7 +100,7 @@
                         <p><strong>The NCST Department</strong></p>
                         <img src='/ncst/public/assets/Hitler_signature.png' alt='hitler' width='150px'>
                     </div>
-                    <a href='../student/student_mail.php?id=".$_GET['id']."' class='list-group-item list-group-item-action mb-3 p-3 rounded-3 shadow-sm notification-card text-decoration-none' aria-current='false'>
+                    <a href='student_mail.php?id=".$_GET['id']."' class='list-group-item list-group-item-action mb-3 p-3 rounded-3 shadow-sm notification-card text-decoration-none' aria-current='false'>
                         <label for='report'>Your Submitted Report : </label>
                             <div class='d-flex gap-3 align-items-start alert $approvalStatus mt-2'>
                                 <div class='user_info d-flex justify-content-between w-100'>
@@ -122,6 +121,7 @@
     </div>
 
 <?php
-    include("../../authenticated/students/student_mail.php");
-    include('/ncst/footer.php');
+    include_once __DIR__ . '/../../../../footer.php';
+    include __DIR__ . "/../../authenticated/students/student_mail.php";
+    include __DIR__ . "/src/components/reportForm.php";
 ?>
