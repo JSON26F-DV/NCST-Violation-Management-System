@@ -216,23 +216,24 @@
     </style>
 </head>
 <body>
-    
+
     <?php
-        if (!isset($_SESSION["student_id"]) || empty($_SESSION["student_id"])) {
-            echo "<script>
-                alert('Please Login first to continue');
-                window.location.href = '/ncst/src/views/guest/login/loginPage.php';
-            </script>";
-            exit;
-        }
+        // if (!isset($_SESSION["student_id"]) || empty($_SESSION["student_id"])) {
+        //     echo "<script>
+        //         alert('Please Login first to continue');
+        //         window.location.href = '/ncst/src/views/guest/login/loginPage.php';
+        //     </script>";
+        //     exit;
+        // }
 
         $user_id = $_SESSION["student_id"];
+            echo "$user_id";
         $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
         $row = $result->fetch_assoc();
         extract($row);
     ?>
 
-    <nav class="navbar navbar-expand-lg fixed-top facebook-navbar bg-primary">
+     <nav class="navbar navbar-expand-lg fixed-top facebook-navbar bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="/ncst/public/assets/ncstLogo.png"  alt="NCST Logo" height="35">
@@ -265,10 +266,9 @@
                         <button  type="button"   class="nav-link" data-bs-toggle="modal" id="notifBtn">
                         <?php
                             $sql = "SELECT COUNT(*) AS unread 
-                                    FROM Mail_log 
+                                    FROM mail_logs
                                     WHERE status != 'pending' 
-                                    AND student_read = 0 
-                                    AND from_id = '$user_id'";
+                                    AND student_id = '$user_id'";
 
                             $result = $conn->query($sql);
                             $row = $result->fetch_assoc();
@@ -317,7 +317,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> 
 
 <?php
     include __DIR__ . "/src/components/reportForm.php";

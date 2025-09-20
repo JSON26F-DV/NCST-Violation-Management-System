@@ -65,6 +65,7 @@
             $subject = $_POST['subject'];
             $message = $_POST['body'];
             $profile_pic = null;
+            $send_type = 'request';
 
             if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
                 $fileName = $_FILES["image"]["name"];
@@ -90,8 +91,8 @@
             }
 
         // Prepared statement para safe
-        $stmt = $conn->prepare("INSERT INTO Mail_log (from_id, to_id, email, subject, body, attachment) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iissss", $student_id, $ncst, $email, $subject, $message, $profile_pic);
+        $stmt = $conn->prepare("INSERT INTO Mail_log (from_id, to_id, email, subject, body, attachment, send_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iisssss", $student_id, $ncst, $email, $subject, $message, $profile_pic, $send_type);
 
             if ($stmt->execute()) {
                 echo "
