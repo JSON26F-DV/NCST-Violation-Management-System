@@ -24,8 +24,7 @@
                 echo "<script>alert('Wrong Email or Password');window.location.href = 'loginPage.php';</script>";
             }
         } else {
-            // Check  OSA_staff ACCOUNT
-            $sql2 = "SELECT * FROM OSA_staff WHERE email=?";
+            $sql2 = "SELECT * FROM ncst_staff WHERE email=?";
             $stmt2 = $conn->prepare($sql2);
             $stmt2->bind_param("s", $email);
             $stmt2->execute();
@@ -36,14 +35,9 @@
 
                 if (password_verify($password, $row2['password'])) {
                     session_start();
-                    $_SESSION["staff_id"] = $row2["id"]; 
-                    $_SESSION["staff_role"] = $row2["staff_role"];
-
-                    if ($row2["staff_role"] === "officer") {
-                        header("Location: /ncst/src/views/authenticated/StudentAffairsOfficer/accountAuditing.php");
-                    } else {
-                        header("Location: /ncst/src/views/admin/auditing/accountAuditing.php");
-                    }
+                    $_SESSION["user_id"] = $row2["user_id"]; 
+                    $_SESSION["	role"] = $row2["role"];
+                    header("Location: /ncst/src/views/admin/auditing/accountAuditing.php");
                     exit();
                 } else {
                     echo "<script>alert('Wrong Email or Password');window.location.href = 'loginPage.php';</script>";

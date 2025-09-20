@@ -1,6 +1,5 @@
 <?php
-    include('../../../../header.php');
-    include('../../../components/navigationBar.php');
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ncst/header.php';
 ?>
 
     <style>
@@ -46,7 +45,7 @@
         }
     </style>
 
-    <div class='container py-4 mt-5'>
+    <div class='container py-4'>
         <div class='row justify-content-center'>
             <div class='col-12 col-lg-8'>
                 <?php
@@ -60,7 +59,7 @@
                                 <div class='d-flex align-items-center'>
                                     <img src='/ncst/public/uploads/profile/{$row->profile_pic}' alt='Student Avatar' class='rounded-circle me-3 bg-light' style='width: 80px; height: 80px; object-fit: cover; border: 3px solid rgba(255,255,255,0.2)'>
                                     <div>
-                                        <h2 class='mb-1 text-white'>{$row->first_name} {$row->last_name}</h2>
+                                        <h3 class='mb-1 text-white '>{$row->first_name} {$row->last_name}</h3>
                                         <p class='mb-0 opacity-75 text-white'>{$row->course} • {$row->year_level} Year</p>
                                     </div>
                                 </div>
@@ -248,6 +247,5 @@
 </div>
 
 <?php
-    include('student_mail.php');
-    include('../../../../footer.php');
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ncst/footer.php';
 ?>

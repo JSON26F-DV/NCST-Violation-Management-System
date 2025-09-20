@@ -1,5 +1,5 @@
 <?php
-    include_once('../../../../header.php');
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ncst/header.php';
 ?>
 
 <style>
@@ -91,7 +91,7 @@
                                 <span class='iconify' data-icon='fluent-color:camera-20' data-width='30px'></span> 
                             </div>
                         </div>
-                        <h2 class='h4 fw-bold mb-2'>$first_name $last_name</h2>
+                        <h3 class='h4 fw-bold mb-2 no-wrap fs-3'>$first_name $last_name</h3>
                         <p class='text-blue fw-medium mb-0'>$course</p>
                     </div>
                     <div class='card-body border-top'>
@@ -276,12 +276,12 @@
                             <div class='row g-3 px-5'>
                                 <?php
                                     $docs = [
-                                        "Birth Certificate" => $hasBirthCertificate,
-                                        "Good Moral"        => $hasGoodMoral,
-                                        "Report Card"       => $hasReportCard,
-                                        "ID Picture"        => $hasIDPicture,
-                                        "Form137"           => $hasForm137,
-                                        "Medical Record"    => $hasMedical_record
+                                        "Birth Certificate"       => $hasBirthCertificate,
+                                        "Good Moral"              => $hasGoodMoral,
+                                        "Report Card"             => $hasReportCard,
+                                        "ID Picture"                 => $hasIDPicture,
+                                        "Form137"                   => $hasForm137,
+                                        "Medical Record"       => $hasMedical_record
                                     ];
 
                                     foreach ($docs as $label => $status) {
@@ -342,6 +342,5 @@
 </main>
 
 <?php
-    include('student_mail.php');
-    include('../../../../footer.php');
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ncst/footer.php';
 ?>

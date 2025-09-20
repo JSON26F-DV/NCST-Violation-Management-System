@@ -218,16 +218,15 @@
 <body>
 
     <?php
-        // if (!isset($_SESSION["student_id"]) || empty($_SESSION["student_id"])) {
-        //     echo "<script>
-        //         alert('Please Login first to continue');
-        //         window.location.href = '/ncst/src/views/guest/login/loginPage.php';
-        //     </script>";
-        //     exit;
-        // }
+        if (!isset($_SESSION["student_id"]) || empty($_SESSION["student_id"])) {
+            echo "<script>
+                alert('Please Login first to continue');
+                window.location.href = '/ncst/src/views/guest/login/loginPage.php';
+            </script>";
+            exit;
+        }
 
         $user_id = $_SESSION["student_id"];
-            echo "$user_id";
         $result = $conn->query("SELECT * FROM students WHERE student_id='$user_id'");
         $row = $result->fetch_assoc();
         extract($row);
@@ -263,7 +262,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button  type="button"   class="nav-link" data-bs-toggle="modal" id="notifBtn">
+                        <a href="/ncst/src/views/authenticated/students/student_mail.php"   class="nav-link" title="Notification">
                         <?php
                             $sql = "SELECT COUNT(*) AS unread 
                                     FROM mail_logs
@@ -280,7 +279,7 @@
                                 echo "<span class='notification-badge'>$unread</span>";
                             }
                         ?>
-                        </button>
+                        </a>
                     </li>
 
                     <li class="nav-item">
@@ -320,5 +319,5 @@
     </nav> 
 
 <?php
-    include __DIR__ . "/src/components/reportForm.php";
+    include __DIR__ . "/src/views/authenticated/students/actions/reportForm.php";
 ?>

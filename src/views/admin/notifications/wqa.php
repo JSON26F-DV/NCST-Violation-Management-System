@@ -1,6 +1,7 @@
 <?php
     include_once __DIR__ . '/../layouts/header_admin.php';
 ?>
+
 <style>
     body {
         background-color: #f5f5f7;
@@ -138,7 +139,7 @@
             <span class="mail-dot dot-danger"></span>
             <span class="mail-dot dot-warning"></span>
             <span class="mail-dot dot-success"></span>
-            <span class="mail-title">Admin Mailbox</span>
+            <span class="mail-title">Student Mailbox</span>
         </div>
         
         <div class="row g-0">
@@ -146,37 +147,67 @@
             <div class="col-md-4 mail-column">
                 <div class="mail-list">
                     <?php
-                            $sql = "SELECT ml.*, s.first_name, s.middle_name, s.last_name, s.profile_pic
-                                        FROM mail_logs ml
-                                        JOIN students s ON ml.student_id = s.student_id
-                                        ORDER BY ml.created_at DESC;
-                                        ";
-                            $query = $conn->query($sql);
+                        $sql = "SELECT * FROM mail_logs 
+                                WHERE student_id = $user_id
+                                AND status != 'pending'
+                                ORDER BY created_at DESC";
 
-                            while ($row = $query->fetch_object()) {
-                                echo "
-                                    <a href='?id={$row->mail_id}'>
-                                        <div class='mail-item unread text-break d-flex '>
-                                            <div class='d-flex '>
-                                                <img src='/ncst/public/uploads/profile/$row->profile_pic' class='mail-avatar me-3' alt='Student'>
-                                                <div class='flex-grow-1'>
-                                                    <div class='mail-subject'>$row->first_name $row->middle_name $row->last_name</div>
-                                                    <p class='mail-preview  w-75'>$row->message</p>
-                                                </div>
+                        $query = $conn->query($sql);
+
+                        while ($row = $query->fetch_object()) {
+                            $statusText = ($row->student_read == 0) ? 'UNREAD' : 'READ';
+                            $badgeClass = ($row->student_read == 0) ? 'bg-warning' : 'bg-secondary';  
+                            $state = ($row->status);
+                            if (isset($state)) {
+                                switch($state) {
+                                    case 'approved':
+                                        $message='Request accepted by Student  Affairs. See more ';
+                                        $alertClass = "alert-success";
+                                        break;
+                                    case 'declined':
+                                        $message='Request not approved by Student Affairs.  See more</a>';
+                                        $alertClass = "alert-danger";
+                                        break;
+                                    default:
+                                        $message='Your request is pending review by Student Affairs. View details ';
+                                        $alertClass = "alert-secondary";
+                                        break;
+                                } 
+                            }
+                            echo"
+                                <a href='?id={$row->mail_id}'>
+                                    <div class='mail-item unread text-break'>
+                                        <div class='d-flex '>
+                                            <img src='/ncst/public/uploads/profile/officer.png' class='mail-avatar me-3' alt='Student'>
+                                            <div class='flex-grow-1'>
+                                                <div class='mail-subject'>ncstOffice@violation.edu.ph</div>
+                                                <p class='mail-preview  w-75'>$message</p>
                                             </div>
                                         </div>
-                                    </a>
-                                ";
-                            }
-                        ?>
+                                    </div>
+                                </a>
+                            ";
+                        }
+                    ?>
                 </div>
             </div>
             
-
+            <?php
+                $id = intval($_GET['id']) ?? null;
+                $result = $conn->query("SELECT * FROM mail_logs WHERE mail_id='$id'");
+                $row = $result->fetch_assoc();
+                extract($row);
+                if($mail_type == "student_to_admin") {
+                    include __DIR__ . "/../../mails/student/mail_verdict.php";
+                }
+            ?>
 
         </div>
     </div>
 </div>
+
+
 <?php
     include_once __DIR__ . '/../layouts/footer_admin.php';
 ?>
+

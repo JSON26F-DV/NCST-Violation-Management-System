@@ -1,6 +1,5 @@
 <?php
     include_once __DIR__ . '/../layouts/header_admin.php';
-    include('layouts/navbar.php');
 ?>
 <style>
     body {

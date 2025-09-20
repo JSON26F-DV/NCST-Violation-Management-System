@@ -37,7 +37,7 @@
     }
 </style>
 
-<div class="modal fade" id="reportForm" tabindex="-1" aria-labelledby="reportFormLabel" aria-hidden="true">
+<div class="modal fade" id="da" tabindex="-1" aria-labelledby="ad" aria-hidden="true">
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-primary">
